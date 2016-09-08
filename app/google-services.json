@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "505095595498",
+    "firebase_url": "https://tenant-maker.firebaseio.com",
+    "project_id": "tenant-maker",
+    "storage_bucket": "tenant-maker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505095595498:android:706160fe53d501bf",
+        "android_client_info": {
+          "package_name": "com.easy.make.tenantmaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505095595498-a0j8omjg1m5u6vd6jvlll53gg9g300oj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.easy.make.tenantmaker",
+            "certificate_hash": "B825332F504EB36F4FDCC94B72AEF60D0B03D4F8"
+          }
+        },
+        {
+          "client_id": "505095595498-0b1me917ci3aobdv6hen1dsqdlbtmtum.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.easy.make.tenantmaker",
+            "certificate_hash": "83FFC0703F86C2AC075926392DD9710D1C15F832"
+          }
+        },
+        {
+          "client_id": "505095595498-0b1e5tk3kr80n8kut05v5a8g15p3grff.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "505095595498-dkagot7ksrqbqt0liv2fdaarlkn2c3er.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVHjh2V9JpZ8ztzL07UOvlUQTt4y2EITU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505095595498-0b1e5tk3kr80n8kut05v5a8g15p3grff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

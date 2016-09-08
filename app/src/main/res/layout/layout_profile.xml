@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_20"
+        android:drawableLeft="@drawable/ic_account_box_white_24dp"
+        android:drawablePadding="@dimen/dimen_20"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="@dimen/dimen_5"
+        android:textSize="@dimen/font_18"
+        tools:text="Ravikiran" />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_20"
+        android:layout_marginRight="@dimen/dimen_20"
+        android:layout_marginBottom="@dimen/dimen_20"
+        android:drawableLeft="@drawable/ic_contact_mail_black_24dp"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:drawablePadding="@dimen/dimen_20"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="@dimen/dimen_5"
+        android:textSize="@dimen/font_18"
+        tools:text="ravikiran.s@practo.com"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_20"
+        android:layout_marginRight="@dimen/dimen_20"
+        android:layout_marginBottom="@dimen/dimen_20"
+        android:drawableLeft="@drawable/ic_contact_phone_black_24dp"
+        android:drawablePadding="@dimen/dimen_20"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:padding="@dimen/dimen_5"
+        android:textSize="@dimen/font_18"
+        tools:text="9907867856"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_20"
+        android:layout_marginRight="@dimen/dimen_20"
+        android:layout_marginBottom="@dimen/dimen_20"
+        android:drawableLeft="@drawable/ic_thumb_up_black_24dp"
+        android:drawablePadding="@dimen/dimen_20"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="@dimen/dimen_5"
+        android:textSize="@dimen/font_18"
+        tools:text="Unpaid"/>
+
+        <LinearLayout
+            android:id="@+id/mark_paid_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_20"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_marginBottom="@dimen/dimen_20"
+            android:background="@color/material_login_button"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="@dimen/dimen_36"
+                android:layout_height="@dimen/dimen_36"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dimen_10"
+                app:srcCompat="@drawable/ic_check_white_24dp"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dimen_48"
+                android:background="@android:color/transparent"
+                android:textColor="@color/material_login_login_color"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/font_18"
+                android:text="@string/str_mark_paid"/>
+
+        </LinearLayout>
+
+
+
+</LinearLayout>

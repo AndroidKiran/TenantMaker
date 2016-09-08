@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.TextInputLayout">
+        <item name="android:textColor">@color/material_login_background</item>
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="colorControlActivated">@color/material_login_background</item>
+        <item name="colorControlHighlight">@color/material_login_background</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/dimen_16</item>
+        <item name="android:layout_marginRight">@dimen/dimen_16</item>
+    </style>
+
+    <style name="AppTheme.TextAppearanceError" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/material_login_register_error_color</item>
+        <item name="android:textSize">@dimen/font_14</item>
+    </style>
+
+
+
+</resources>

@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">TenantManager</string>
+    <string name="or">or</string>
+    <string name="fb_login_text">Sign in with facebook</string>
+    <string name="google_login_text">Sign in with Google</string>
+
+    <!--Add tenant-->
+    <string name="str_first_name">First name</string>
+    <string name="str_last_name">Last name</string>
+    <string name="str_email">Email</string>
+    <string name="str_admission_date">Rent Date</string>
+    <string name="str_room_num">Room Number</string>
+    <string name="str_save">Save</string>
+    <string name="str_update">Update</string>
+    <string name="str_mark_paid">Mark Paid</string>
+    <string name="str_mobile">Mobile</string>
+    <string name="str_address">Address</string>
+    <string name="str_add_tenant">Create tenant</string>
+    <string name="error_add_tenant">Failed to add tenant, Try again</string>
+    <string name="str_camera">Camera</string>
+    <string name="str_gallery">Gallery</string>
+    <string name="str_tenants">Due tenants</string>
+    <string name="str_basic_details">Basic Details</string>
+    <string name="str_offical_details">Offical Details</string>
+    <string name="str_pg_details">Flat/PG details</string>
+    <string name="err_valid_email">Please enter valid email</string>
+    <string name="err_valid_first_name">Please enter valid first name</string>
+    <string name="err_valid_last_name">Please enter valid last name</string>
+    <string name="err_valid_mobile">Please enter valid mobile</string>
+    <string name="err_valid_address">Please enter valid address</string>
+    <string name="err_valid_rent_date">Please select the admission date</string>
+    <string name="err_valid_pg">Please select the guest house</string>
+    <string name="err_valid_room">Please enter the vaild room number</string>
+    <string name="str_alphabets">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+
+
+
+    <string name="login">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="go">GO</string>
+    <string name="register">REGISTER</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="next">NEXT</string>
+
+    <string name="config_data">config</string>
+
+
+    <!--Login-->
+    <string name="user_name">User name</string>
+    <string name="network_error">Something went wrong. Please check Network Connection.</string>
+    <string name="username_error">Please enter your username</string>
+    <string name="email_error">Please enter your email</string>
+    <string name="password_error">Please choose a password</string>
+    <string name="no_email_error">You need an email to sign up</string>
+    <string name="invalid_email_error">Please enter a valid email</string>
+
+    <string name="loading_holder">Please wait…</string>
+    <string name="logging_holder">Logging in…</string>
+    <string name="getting_data">Getting User Info…</string>
+    <string name="password_mismatch">Make sure your passwords match</string>
+    <string name="login_failed">Login failed! Try again!</string>
+
+    <string name="facebook_app_id">1607544596204432</string>
+
+    <string name="user_exists">User already logged in</string>
+
+
+
+
+</resources>
