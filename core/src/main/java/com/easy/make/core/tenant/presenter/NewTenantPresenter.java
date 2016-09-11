@@ -60,11 +60,12 @@ public class NewTenantPresenter {
     private final NewTenantDisplayer.TenantCreationListener tenantCreationListener = new NewTenantDisplayer.TenantCreationListener() {
         @Override
         public void onCreateTenantClicked(Tenant tenant) {
-            tenant.setOwnId(user.getId());
-            tenantService.createNewTenant(tenant).subscribe(new Action1<DatabaseResult<Tenant>>() {
+            newTenantDisplayer.showProgress();
+            tenantService.createNewTenant(tenant, user).subscribe(new Action1<DatabaseResult<Tenant>>() {
                 @Override
                 public void call(DatabaseResult<Tenant> tenantDatabaseResult) {
                     System.out.print(""+tenantDatabaseResult.getData());
+                    newTenantDisplayer.dismissProgress();
                 }
             });
         }

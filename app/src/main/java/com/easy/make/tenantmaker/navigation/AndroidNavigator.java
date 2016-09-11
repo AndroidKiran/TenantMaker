@@ -6,8 +6,10 @@ import android.content.Intent;
 import com.easy.make.core.navigation.Navigator;
 import com.easy.make.core.tenant.data.model.Tenant;
 import com.easy.make.tenantmaker.login.LoginActivity;
+import com.easy.make.tenantmaker.home.HomeActivity;
 import com.easy.make.tenantmaker.tenants.CreateTenantActivity;
 import com.easy.make.tenantmaker.tenants.TenantListActivity;
+import com.easy.make.tenantmaker.utils.UtilBundles;
 
 public class AndroidNavigator implements Navigator {
 
@@ -18,8 +20,20 @@ public class AndroidNavigator implements Navigator {
     }
 
     @Override
+    public void toHome() {
+        activity.startActivity(new Intent(activity, HomeActivity.class));
+    }
+
+    @Override
     public void toTenants() {
         activity.startActivity(new Intent(activity, TenantListActivity.class));
+    }
+
+    @Override
+    public void toTenants(String query) {
+        Intent intent = new Intent(activity, TenantListActivity.class);
+        intent.putExtra(UtilBundles.EXTRA_QUERY_TEXT, query);
+        activity.startActivity(intent);
     }
 
     @Override

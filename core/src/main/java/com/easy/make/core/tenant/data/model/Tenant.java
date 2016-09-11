@@ -2,6 +2,9 @@ package com.easy.make.core.tenant.data.model;
 
 public class Tenant {
 
+    public static final String OWNER_ID = "ownId";
+    public static final String FIRST_NAME = "firstName";
+
     private String firstName;
     private String lastName;
     private String mobile;

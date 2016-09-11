@@ -28,6 +28,8 @@ public class TenantPresenter {
     private final Analytics analytics;
     private final Navigator navigator;
     private final ErrorLogger errorLogger;
+    private final boolean toolbarEnabled;
+    private final String query;
 
     private Subscription subscription;
 
@@ -37,7 +39,9 @@ public class TenantPresenter {
             TenantsDisplayer tenantsDisplayer,
             Analytics analytics,
             Navigator navigator,
-            ErrorLogger errorLogger
+            ErrorLogger errorLogger,
+            String query,
+            boolean toolBarEnabled
     ) {
         this.loginService = loginService;
         this.tenantService = tenantService;
@@ -45,23 +49,17 @@ public class TenantPresenter {
         this.analytics = analytics;
         this.navigator = navigator;
         this.errorLogger = errorLogger;
+        this.toolbarEnabled = toolBarEnabled;
+        this.query = query;
     }
 
     public void startPresenting() {
+        tenantsDisplayer.toogleToolbarVisbility(toolbarEnabled);
+        tenantsDisplayer.toogleFabBtnVisibility(toolbarEnabled);
         tenantsDisplayer.attach(tenantInteractionListener);
-//        subscription = loginService.getAuthentication()
-//                .filter(successfullyAuthenticated())
-//                .flatMap(tenantsForUser())
-//                .subscribe(new Action1<DatabaseResult<Tenants>>() {
-//                    @Override
-//                    public void call(DatabaseResult<Tenants> tenantsDatabaseResult) {
-//                        System.out.println("sdljjsd"+tenantsDatabaseResult.getData());
-//                    }
-//                });
-
         subscription = loginService.getAuthentication()
                 .filter(successfullyAuthenticated())
-                .flatMap(getTenantsForUser())
+                .flatMap(toolbarEnabled ? getTenantsForUser(query) : getTenantsForUser())
                 .subscribe(new Action1<Tenants>() {
                     @Override
                     public void call(Tenants tenants) {
@@ -112,6 +110,15 @@ public class TenantPresenter {
             @Override
             public Observable<Tenants> call(Authentication authentication) {
                 return tenantService.getTenants(authentication.getUser());
+            }
+        };
+    }
+
+    private Func1<Authentication, Observable<Tenants>> getTenantsForUser(final String query){
+        return new Func1<Authentication, Observable<Tenants>>() {
+            @Override
+            public Observable<Tenants> call(Authentication authentication) {
+                return tenantService.getTenants(authentication.getUser(), query);
             }
         };
     }

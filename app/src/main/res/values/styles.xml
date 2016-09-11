@@ -17,5 +17,21 @@
     </style>
 
 
+    <style name="TabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabPaddingStart">@dimen/dimen_2</item>
+        <item name="tabPaddingEnd">@dimen/dimen_2</item>
+        <item name="elevation">@dimen/dimen_1</item>
+        <item name="tabGravity">fill</item>
+    </style>
+
+
+    <style name="TabLayout.standardTabs">
+        <item name="android:background">@color/material_login_background</item>
+        <item name="tabIndicatorColor">@color/white_neutral</item>
+        <item name="tabSelectedTextColor">@color/white_neutral</item>
+        <item name="tabTextColor">@color/grey_pale_2</item>
+    </style>
+
+
 
 </resources>

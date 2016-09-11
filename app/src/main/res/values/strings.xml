@@ -32,7 +32,13 @@
     <string name="err_valid_pg">Please select the guest house</string>
     <string name="err_valid_room">Please enter the vaild room number</string>
     <string name="str_alphabets">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="str_progress_wait">Please wait</string>
+    <string name="str_progress_tenant_title">Creating new tenant</string>
 
+
+    <!--Home-->
+    <string name="str_due_tenants">Due tenants</string>
+    <string name="str_profile">User profile</string>
 
 
     <string name="login">LOGIN</string>
@@ -60,10 +66,11 @@
     <string name="password_mismatch">Make sure your passwords match</string>
     <string name="login_failed">Login failed! Try again!</string>
 
-    <string name="facebook_app_id">1607544596204432</string>
-
     <string name="user_exists">User already logged in</string>
 
+
+
+    <string name="fab_behavior">com.easy.make.tenantmaker.component.FabBehavior</string>
 
 
 

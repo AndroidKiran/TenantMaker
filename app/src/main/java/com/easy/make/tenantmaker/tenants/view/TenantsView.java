@@ -13,10 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration;
 import com.easy.make.core.tenant.data.model.Tenants;
 import com.easy.make.core.tenant.displayer.TenantsDisplayer;
 import com.easy.make.tenantmaker.R;
+import com.easy.make.tenantmaker.component.DividerItemDecoration;
 import com.novoda.notils.caster.Views;
 
 /**
@@ -34,7 +34,6 @@ public class TenantsView extends LinearLayout implements TenantsDisplayer {
 
     public TenantsView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setOrientation(VERTICAL);
         tenantAdapter = new TenantAdapter(LayoutInflater.from(context));
     }
 
@@ -53,7 +52,7 @@ public class TenantsView extends LinearLayout implements TenantsDisplayer {
 
     private void setRecyclerView() {
         recyclerView = Views.findById(this, R.id.tenants_recycler_view);
-        Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.simple_divider);
+        Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.seperator_72);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(dividerDrawable);
         recyclerView.addItemDecoration(dividerItemDecoration);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -67,6 +66,17 @@ public class TenantsView extends LinearLayout implements TenantsDisplayer {
 //        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setTitle(R.string.str_tenants);
 
+    }
+
+
+    @Override
+    public void toogleToolbarVisbility(boolean toolbarEnabled) {
+        toolbar.setVisibility(toolbarEnabled ? VISIBLE : GONE);
+    }
+
+    @Override
+    public void toogleFabBtnVisibility(boolean fabEnabled) {
+        addTenantFabButton.setVisibility(fabEnabled ? VISIBLE : GONE);
     }
 
     @Override

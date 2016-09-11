@@ -9,8 +9,7 @@
         android:layout_height="@dimen/dimen_40"
         android:scaleType="fitCenter"
         android:layout_marginRight="@dimen/dimen_16"
-        app:srcCompat="@drawable/ic_person_add_white"
-        tools:srcCompat="@drawable/ic_person_add_white"/>
+        app:srcCompat="@drawable/ic_person_add_white"/>
 
     <LinearLayout
         android:id="@+id/tenantDetailsLayour"
@@ -19,22 +18,41 @@
         android:orientation="vertical"
         android:layout_toRightOf="@id/tenant_avatar">
 
-        <android.support.v7.widget.AppCompatTextView
+        <com.easy.make.tenantmaker.component.text.TextView
             android:id="@+id/tenant_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="sds"
+            tools:text="Arnold Randy"
+            app:fontTypeface="museosans500"
             android:paddingBottom="@dimen/dimen_5"
+            android:textColor="@color/grey_charcoal"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:paddingTop="@dimen/dimen_5"
             android:textSize="@dimen/font_16"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <com.easy.make.tenantmaker.component.text.TextView
+            android:id="@+id/tenant_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dimen_5"
+            android:textColor="@color/grey_cool"
+            tools:text="Shri Sai Paying Guest"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:fontTypeface="museosans500"
+            android:textSize="@dimen/font_14"/>
+
+        <com.easy.make.tenantmaker.component.text.TextView
             android:id="@+id/tenant_room_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/dimen_5"
-            tools:text="45"
-            android:textSize="@dimen/font_16"/>
+            android:maxLines="1"
+            android:textColor="@color/grey_cool"
+            tools:text="Room num - 45"
+            app:fontTypeface="museosans500"
+            android:textSize="@dimen/font_14"/>
 
     </LinearLayout>
 

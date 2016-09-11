@@ -13,4 +13,20 @@
     <color name="material_login_background">#47a747</color>
     <color name="material_login_button">#307630</color>
 
+
+    <color name="black_1">#1e2830</color>
+    <color name="black_2">#4a4a4a</color>
+    <color name="grey_charcoal">#454c4e</color>
+    <color name="grey_cool">#98a1a5</color>
+    <color name="grey_pale_2">#e2e8ea</color>
+
+    <color name="white_neutral">#ffffff</color>
+    <color name="grey_pale">#f3f6f7</color>
+    <color name="bg_grey">#F3F6F7</color>
+
+    <color name="grey_shade_1">#33000000</color>
+    <color name="grey_shade_2">#80000000</color>
+    <color name="grey_shade_3">#eaeaea</color>
+    <color name="grey_shade_4">#BCC6C9</color>
+
 </resources>

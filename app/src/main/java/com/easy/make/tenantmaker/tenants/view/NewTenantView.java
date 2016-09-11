@@ -20,7 +20,9 @@ import android.widget.EditText;
 import com.easy.make.core.tenant.data.model.Tenant;
 import com.easy.make.core.tenant.displayer.NewTenantDisplayer;
 import com.easy.make.tenantmaker.R;
+import com.easy.make.tenantmaker.component.materialcomponent.MaterialProgressDialog;
 import com.easy.make.tenantmaker.utils.DateTimeUtils;
+import com.easy.make.tenantmaker.utils.DialogUtils;
 import com.novoda.notils.caster.Views;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -64,6 +66,7 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
     public AppCompatTextView errRentDateText;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private AppCompatActivity appCompatActivity;
+    private MaterialProgressDialog materialProgressDialog;
 
     public NewTenantView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -160,6 +163,24 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
         pgSpinner.setOnItemSelectedListener(null);
         rentDateTextView.setOnClickListener(null);
         this.tenantCreationListener = null;
+    }
+
+    @Override
+    public void showProgress() {
+        materialProgressDialog =  new MaterialProgressDialog(getAppCompatActivity());
+        DialogUtils.showMaterialProgressDialog(materialProgressDialog, getAppCompatActivity().getString(R.string.str_progress_tenant_title), getAppCompatActivity().getString(R.string.str_progress_wait), getAppCompatActivity());
+    }
+
+    @Override
+    public void dismissProgress() {
+        if (materialProgressDialog != null){
+            materialProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void clear() {
+
     }
 
     private boolean validateForm() {

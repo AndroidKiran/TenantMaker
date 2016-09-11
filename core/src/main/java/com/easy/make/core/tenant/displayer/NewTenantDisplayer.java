@@ -11,6 +11,12 @@ public interface NewTenantDisplayer {
 
     void detach(TenantCreationListener tenantCreationListener);
 
+    void showProgress();
+
+    void dismissProgress();
+
+    void clear();
+
     interface TenantCreationListener {
 
         void onCreateTenantClicked(Tenant tenant);

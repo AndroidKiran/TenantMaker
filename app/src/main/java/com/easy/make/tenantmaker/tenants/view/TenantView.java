@@ -19,6 +19,7 @@ public class TenantView extends RelativeLayout {
     private int layoutResId;
     private AppCompatTextView tenantName;
     private AppCompatTextView tenantRoomNo;
+    private AppCompatTextView tenantAddress;
 
     public TenantView(Context context) {
         super(context);
@@ -45,10 +46,13 @@ public class TenantView extends RelativeLayout {
         super.onFinishInflate();
         View.inflate(getContext(), layoutResId, this);
         this.tenantName = Views.findById(this, R.id.tenant_name);
+        this.tenantAddress = Views.findById(this, R.id.tenant_address);
         this.tenantRoomNo = Views.findById(this, R.id.tenant_room_no);
     }
 
     public void display(Tenant tenant){
         tenantName.setText(tenant.getFirstName()+" "+tenant.getLastName());
+        tenantAddress.setText(tenant.getAddress());
+        tenantRoomNo.setText(getContext().getString(R.string.str_room_num)+"-"+tenant.getPgOrFlatNum());
     }
 }

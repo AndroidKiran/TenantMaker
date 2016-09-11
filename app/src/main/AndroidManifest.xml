@@ -15,9 +15,6 @@
     <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
-    <meta-data
-        android:name="com.facebook.sdk.ApplicationId"
-        android:value="@string/facebook_app_id" />
 
     <application
         android:name=".TenantApplication"
@@ -34,6 +31,13 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name=".home.HomeActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".tenants.TenantListActivity"

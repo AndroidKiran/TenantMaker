@@ -8,6 +8,10 @@ import com.easy.make.core.tenant.data.model.Tenants;
  */
 public interface TenantsDisplayer {
 
+    void toogleToolbarVisbility(boolean toolbarEnabled);
+
+    void toogleFabBtnVisibility(boolean fabEnabled);
+
     void display(Tenants tenants);
 
     void attach(TenantInteractionListener tenantInteractionListener);

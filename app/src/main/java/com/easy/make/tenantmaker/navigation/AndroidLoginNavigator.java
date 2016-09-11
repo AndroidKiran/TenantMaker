@@ -27,9 +27,20 @@ public class AndroidLoginNavigator implements LoginNavigator {
     }
 
     @Override
+    public void toHome() {
+        navigator.toHome();
+        activity.finish();
+    }
+
+    @Override
     public void toTenants() {
         navigator.toTenants();
         activity.finish();
+    }
+
+    @Override
+    public void toTenants(String query) {
+        navigator.toTenants(query);
     }
 
     @Override

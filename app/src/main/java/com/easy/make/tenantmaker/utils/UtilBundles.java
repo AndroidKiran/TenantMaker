@@ -5,5 +5,6 @@ package com.easy.make.tenantmaker.utils;
  */
 public class UtilBundles {
     public static final String ITEM_LIST = "item_list";
-    public static final String PICKER_PATH = "picker_path";
+    public static final String EXTRA_QUERY_TEXT = "query_text";
+    public static final String EXTRA_BUNDLE = "extra_bundle";
 }

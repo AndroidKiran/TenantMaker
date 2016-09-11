@@ -5,8 +5,6 @@ import com.easy.make.core.tenant.data.model.Tenant;
 import com.easy.make.core.tenant.data.model.Tenants;
 import com.easy.make.core.user.data.model.User;
 
-import java.util.List;
-
 import rx.Observable;
 
 /**
@@ -14,12 +12,10 @@ import rx.Observable;
  */
 public interface TenantDatabase {
 
-    Observable<List<String>> observeTenantIdsFor(User user);
-
-    Observable<Tenant> readTenantFrom(String uid, User user);
-
     Observable <Tenants> observeTenantsFor(User user);
 
-    Observable<Tenant> writeTenant(Tenant newTenant);
+    Observable <Tenants> observeTenantsFor(User user, String query);
+
+    Observable<Tenant> writeTenant(Tenant newTenant, User user);
 
 }

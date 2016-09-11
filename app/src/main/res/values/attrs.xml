@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="fontTypeface" format="enum">
+        <enum name="museosans500" value="0" />
+        <enum name="museosans700" value="1" />
+        <enum name="pt_serif_regular" value="2" />
+        <enum name="pt_serif_bold" value="3" />
+    </attr>
+
+    <attr name="textSpacing" format="float" />
+
+    <!--TextView-->
+    <declare-styleable name="TextView">
+        <attr name="fontTypeface" />
+        <attr name="textSpacing" />
+    </declare-styleable>
+
+</resources>

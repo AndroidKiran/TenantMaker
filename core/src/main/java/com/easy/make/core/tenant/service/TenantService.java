@@ -17,6 +17,8 @@ public interface TenantService {
 
     Observable<Tenants> getTenants(User user);
 
-    Observable<DatabaseResult<Tenant>> createNewTenant(Tenant newTenant);
+    Observable<Tenants> getTenants(User user, String query);
+
+    Observable<DatabaseResult<Tenant>> createNewTenant(Tenant newTenant, User user);
 
 }

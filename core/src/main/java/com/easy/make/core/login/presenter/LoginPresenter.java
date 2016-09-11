@@ -41,7 +41,7 @@ public class LoginPresenter {
                     @Override
                     public void call(Authentication authentication) {
                         if (authentication.isSuccess()) {
-                            navigator.toTenants();
+                            navigator.toHome();
                         } else {
                             errorLogger.reportError(authentication.getFailure(), "Authentication failed");
                             loginDisplayer.showAuthenticationError(authentication.getFailure().getLocalizedMessage()); //TODO improve error display

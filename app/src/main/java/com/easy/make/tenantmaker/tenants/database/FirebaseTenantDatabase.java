@@ -31,75 +31,21 @@ public class FirebaseTenantDatabase implements TenantDatabase {
     }
 
     @Override
-    public Observable<List<String>> observeTenantIdsFor(User user) {
-        return null;
-//        return firebaseObservableListeners.listenToValueEvents(tenantDB.child(user.getId()).limitToLast(DEFAULT_LIMIT), getKeys());
-    }
-
-    @Override
-    public Observable<Tenant> readTenantFrom(String uid, User user) {
-        return null;
-//        return firebaseObservableListeners.listenToSingleValueEvents(tenantDB.child(user.getId()).child(uid), as(Tenant.class));
-    }
-
-//    @Override
-//    public Observable<Tenants> observeTenantsFor(User user) {
-//        return firebaseObservableListeners.listenToValueEvents(tenantDB.child(user.getId()), getTenants());
-//    }
-
-    @Override
     public Observable<Tenants> observeTenantsFor(User user) {
-        return firebaseObservableListeners.listenToValueEvents(tenantDB.limitToLast(DEFAULT_LIMIT), getTenants(user));
+        return firebaseObservableListeners.listenToValueEvents(tenantDB.child(user.getId()).orderByChild(Tenant.FIRST_NAME).limitToFirst(DEFAULT_LIMIT), getTenants());
     }
 
     @Override
-    public Observable<Tenant> writeTenant(Tenant newTenant) {
-        return firebaseObservableListeners.setValue(newTenant, tenantDB.push(), newTenant);
+    public Observable<Tenants> observeTenantsFor(User user, String query) {
+        return firebaseObservableListeners.listenToValueEvents(tenantDB.child(user.getId()).orderByChild(Tenant.FIRST_NAME).equalTo(query).limitToLast(DEFAULT_LIMIT), getTenants());
     }
 
+    @Override
+    public Observable<Tenant> writeTenant(Tenant newTenant, User user) {
+        return firebaseObservableListeners.setValue(newTenant, tenantDB.child(user.getId()).push(), newTenant);
+    }
 
-//    private <T> Func1<DataSnapshot, T> as(final Class<T> tClass) {
-//        return new Func1<DataSnapshot, T>() {
-//            @Override
-//            public T call(DataSnapshot dataSnapshot) {
-//                return dataSnapshot.getValue(tClass);
-//            }
-//        };
-//    }
-//
-//    private static Func1<DataSnapshot, List<String>> getKeys() {
-//        return new Func1<DataSnapshot, List<String>>() {
-//            @Override
-//            public List<String> call(DataSnapshot dataSnapshot) {
-//                List<String> keys = new ArrayList<>();
-//                if (dataSnapshot.hasChildren()) {
-//                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-//                    for (DataSnapshot child : children) {
-//                        keys.add(child.getKey());
-//                    }
-//                }
-//                return keys;
-//            }
-//        };
-//    }
-
-//    private static Func1<DataSnapshot, Tenants> getTenants() {
-//        return new Func1<DataSnapshot, Tenants>() {
-//            @Override
-//            public Tenants call(DataSnapshot dataSnapshot) {
-//                List<Tenant> tenants = new ArrayList<Tenant>();
-//                if (dataSnapshot.hasChildren()) {
-//                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-//                    for (DataSnapshot child : children) {
-//                        tenants.add(child.getValue(Tenant.class));
-//                    }
-//                }
-//                return new Tenants(tenants);
-//            }
-//        };
-//    }
-
-    private static Func1<DataSnapshot, Tenants> getTenants(final User user) {
+    private static Func1<DataSnapshot, Tenants> getTenants() {
         return new Func1<DataSnapshot, Tenants>() {
             @Override
             public Tenants call(DataSnapshot dataSnapshot) {
@@ -108,9 +54,7 @@ public class FirebaseTenantDatabase implements TenantDatabase {
                     Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                     for (DataSnapshot child : children) {
                         Tenant tenant = (Tenant) child.getValue(Tenant.class);
-                        if (tenant.getOwnId().equals(user.getId())){
-                            tenants.add(tenant);
-                        }
+                        tenants.add(tenant);
                     }
                 }
                 return new Tenants(tenants);

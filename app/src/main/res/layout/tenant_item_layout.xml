@@ -2,5 +2,6 @@
 <com.easy.make.tenantmaker.tenants.view.TenantView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/selector_white"
     android:padding="@dimen/dimen_16"
     android:layout="@layout/merge_tenant_item" />
