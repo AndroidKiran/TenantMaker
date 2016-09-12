@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.easy.make.tenantmaker.component.text.TextView
+        android:id="@+id/txt_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_charcoal"
+        android:textSize="@dimen/font_20"
+        android:padding="@dimen/dimen_20"
+        android:layout_gravity="center_horizontal|top"
+        android:gravity="center_horizontal"
+        app:fontTypeface="museosans500"
+        tools:text="Smaple"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/boarding_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/dimen_10"
+        tools:background="@drawable/common_plus_signin_btn_text_dark_focused"
+        tools:srcCompat="@drawable/common_plus_signin_btn_text_dark_focused"/>
+
+    <com.easy.make.tenantmaker.component.text.TextView
+        android:id="@+id/txt_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_charcoal"
+        android:textSize="@dimen/font_20"
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dimen_10"
+        app:fontTypeface="museosans500"
+        tools:text="Smaple"/>
+
+
+</FrameLayout>

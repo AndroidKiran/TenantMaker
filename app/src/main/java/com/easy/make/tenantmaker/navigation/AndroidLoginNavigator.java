@@ -59,6 +59,16 @@ public class AndroidLoginNavigator implements LoginNavigator {
     }
 
     @Override
+    public void toNewFlat() {
+
+    }
+
+    @Override
+    public void toMain() {
+        navigator.toMain();
+    }
+
+    @Override
     public void toLogin() {
         navigator.toLogin();
     }

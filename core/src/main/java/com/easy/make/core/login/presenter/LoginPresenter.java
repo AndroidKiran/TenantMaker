@@ -1,6 +1,8 @@
 package com.easy.make.core.login.presenter;
 
 
+import com.easy.make.core.Utils.GsonService;
+import com.easy.make.core.Utils.PreferenceService;
 import com.easy.make.core.analytics.Analytics;
 import com.easy.make.core.analytics.ErrorLogger;
 import com.easy.make.core.login.data.model.Authentication;
@@ -18,6 +20,8 @@ public class LoginPresenter {
     private final LoginNavigator navigator;
     private final ErrorLogger errorLogger;
     private final Analytics analytics;
+    private final GsonService gsonService;
+    private final PreferenceService preferenceService;
 
     private Subscription subscription;
 
@@ -25,23 +29,29 @@ public class LoginPresenter {
                           LoginDisplayer loginDisplayer,
                           LoginNavigator navigator,
                           ErrorLogger errorLogger,
-                          Analytics analytics) {
+                          Analytics analytics,
+                          PreferenceService preferenceService,
+                          GsonService gsonService) {
         this.loginService = loginService;
         this.loginDisplayer = loginDisplayer;
         this.navigator = navigator;
         this.errorLogger = errorLogger;
         this.analytics = analytics;
+        this.preferenceService = preferenceService;
+        this.gsonService = gsonService;
     }
 
     public void startPresenting() {
         navigator.attach(loginResultListener);
+        loginDisplayer.setUpViewPager();
         loginDisplayer.attach(actionListener);
         subscription = loginService.getAuthentication()
                 .subscribe(new Action1<Authentication>() {
                     @Override
                     public void call(Authentication authentication) {
                         if (authentication.isSuccess()) {
-                            navigator.toHome();
+                            preferenceService.setLoginUserPreference(gsonService.toString(authentication.getUser()));
+                            navigator.toMain();
                         } else {
                             errorLogger.reportError(authentication.getFailure(), "Authentication failed");
                             loginDisplayer.showAuthenticationError(authentication.getFailure().getLocalizedMessage()); //TODO improve error display

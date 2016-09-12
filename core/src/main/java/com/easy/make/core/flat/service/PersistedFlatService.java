@@ -27,8 +27,8 @@ public class PersistedFlatService implements FlatService {
     }
 
     @Override
-    public Observable<DatabaseResult<Flat>> createNewFlat(Flat newFlat, User user) {
-        return flatDatabase.writeFlat(newFlat, user)
+    public Observable<DatabaseResult<Flat>> createNewFlat(Flat newFlat) {
+        return flatDatabase.writeFlat(newFlat)
                 .map(new Func1<Flat, DatabaseResult<Flat>>() {
                     @Override
                     public DatabaseResult<Flat> call(Flat flat) {

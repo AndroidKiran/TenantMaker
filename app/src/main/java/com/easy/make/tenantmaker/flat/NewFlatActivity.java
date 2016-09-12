@@ -31,7 +31,9 @@ public class NewFlatActivity extends BaseActivity {
                 Dependencies.INSTANCE.getLoginService(),
                 new AndroidNavigator(this),
                 Dependencies.INSTANCE.getErrorLogger(),
-                Dependencies.INSTANCE.getAnalytics());
+                Dependencies.INSTANCE.getAnalytics(),
+                Dependencies.INSTANCE.getPreference(),
+                Dependencies.INSTANCE.getGsonService());
 
     }
 

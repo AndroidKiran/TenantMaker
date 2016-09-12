@@ -13,5 +13,5 @@ public interface FlatDatabase {
 
     Observable<Flats> observeFlatsFor(User user);
 
-    Observable<Flat> writeFlat(Flat newFlat, User user);
+    Observable<Flat> writeFlat(Flat newFlat);
 }

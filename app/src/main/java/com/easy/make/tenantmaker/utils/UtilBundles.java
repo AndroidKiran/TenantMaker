@@ -5,6 +5,7 @@ package com.easy.make.tenantmaker.utils;
  */
 public class UtilBundles {
     public static final String ITEM_LIST = "item_list";
-    public static final String EXTRA_QUERY_TEXT = "query_text";
+    public static final String EXTRA_TEXT = "extra_text";
     public static final String EXTRA_BUNDLE = "extra_bundle";
+    public static final String EXTRA_INT = "extra_int";
 }

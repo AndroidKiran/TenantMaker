@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.easy.make.core.navigation.Navigator;
 import com.easy.make.core.tenant.data.model.Tenant;
+import com.easy.make.tenantmaker.flat.NewFlatActivity;
 import com.easy.make.tenantmaker.login.LoginActivity;
 import com.easy.make.tenantmaker.home.HomeActivity;
 import com.easy.make.tenantmaker.tenants.CreateTenantActivity;
@@ -14,6 +15,8 @@ import com.easy.make.tenantmaker.utils.UtilBundles;
 public class AndroidNavigator implements Navigator {
 
     private final Activity activity;
+    public static  final int FIRST_FLOW_REQUEST_CODE = 001;
+    public static  final int FIRST_FLOW_RESPONSE_CODE = 002;
 
     public AndroidNavigator(Activity activity) {
         this.activity = activity;
@@ -22,17 +25,18 @@ public class AndroidNavigator implements Navigator {
     @Override
     public void toHome() {
         activity.startActivity(new Intent(activity, HomeActivity.class));
+        activity.finish();
     }
 
     @Override
     public void toTenants() {
-        activity.startActivity(new Intent(activity, TenantListActivity.class));
+        activity.startActivityForResult(new Intent(activity, TenantListActivity.class), FIRST_FLOW_REQUEST_CODE);
     }
 
     @Override
     public void toTenants(String query) {
         Intent intent = new Intent(activity, TenantListActivity.class);
-        intent.putExtra(UtilBundles.EXTRA_QUERY_TEXT, query);
+        intent.putExtra(UtilBundles.EXTRA_TEXT, query);
         activity.startActivity(intent);
     }
 
@@ -51,13 +55,23 @@ public class AndroidNavigator implements Navigator {
     @Override
     public void toLogin() {
         Intent intent = new Intent(activity, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        activity.startActivity(intent);
-        activity.finish();
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivityForResult(intent, FIRST_FLOW_REQUEST_CODE);
     }
 
     @Override
     public void toParent() {
+        activity.finish();
+    }
+
+    @Override
+    public void toNewFlat() {
+        activity.startActivityForResult(new Intent(activity, NewFlatActivity.class), FIRST_FLOW_REQUEST_CODE);
+    }
+
+    @Override
+    public void toMain() {
+        activity.setResult(FIRST_FLOW_RESPONSE_CODE);
         activity.finish();
     }
 }

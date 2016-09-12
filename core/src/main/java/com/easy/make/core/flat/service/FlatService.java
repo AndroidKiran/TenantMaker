@@ -14,5 +14,5 @@ public interface FlatService {
 
     Observable<Flats> getFlats(User user);
 
-    Observable<DatabaseResult<Flat>> createNewFlat(Flat newFlat, User user);
+    Observable<DatabaseResult<Flat>> createNewFlat(Flat newFlat);
 }

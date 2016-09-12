@@ -3,6 +3,8 @@ package com.easy.make.tenantmaker;
 import android.content.Context;
 
 import com.easy.make.core.Config;
+import com.easy.make.core.Utils.GsonService;
+import com.easy.make.core.Utils.PreferenceService;
 import com.easy.make.core.analytics.Analytics;
 import com.easy.make.core.analytics.ErrorLogger;
 import com.easy.make.core.flat.service.FlatService;
@@ -20,6 +22,8 @@ import com.easy.make.tenantmaker.login.database.FirebaseAuthDatabase;
 import com.easy.make.tenantmaker.rx.FirebaseObservableListeners;
 import com.easy.make.tenantmaker.tenants.database.FirebaseTenantDatabase;
 import com.easy.make.tenantmaker.user.database.FirebaseUserDatabase;
+import com.easy.make.tenantmaker.utils.AppPreferences;
+import com.easy.make.tenantmaker.utils.GsonServiceImpl;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -37,6 +41,8 @@ public enum Dependencies {
     private Config config;
     private PersistedTenantService tenantService;
     private PersistedFlatService flatService;
+    private AppPreferences pref;
+    private GsonServiceImpl gsonService;
 
     public void init(Context context) {
         if (needsInitialisation()) {
@@ -55,12 +61,15 @@ public enum Dependencies {
             userService = new PersistedUserService(userDatabase);
             flatService = new PersistedFlatService(new FirebaseFlatDatabase(firebaseDatabase, firebaseObservableListeners));
             config = FirebaseConfig.newInstance().init(errorLogger);
+            pref = new AppPreferences(appContext);
+            gsonService = new GsonServiceImpl();
+
         }
     }
 
     private boolean needsInitialisation() {
         return loginService == null ||  tenantService == null
-                || userService == null || analytics == null || errorLogger == null;
+                || userService == null || analytics == null || flatService == null || errorLogger == null;
     }
 
     public Analytics getAnalytics() {
@@ -70,10 +79,6 @@ public enum Dependencies {
     public LoginService getLoginService() {
         return loginService;
     }
-
-//    public ChatService getChatService() {
-//        return chatService;
-//    }
 
     public TenantService getTenantService() {
         return tenantService;
@@ -93,5 +98,13 @@ public enum Dependencies {
 
     public Config getConfig() {
         return config;
+    }
+
+    public PreferenceService getPreference(){
+        return pref;
+    }
+
+    public GsonService getGsonService(){
+        return gsonService;
     }
 }

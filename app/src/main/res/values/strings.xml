@@ -68,11 +68,19 @@
 
     <string name="user_exists">User already logged in</string>
 
+    <!--Onboarding-->
+    <string name="str_boarding_heading_type_one">Heading 1</string>
+    <string name="str_boarding_heading_type_two">Heading 2</string>
+    <string name="str_boarding_heading_type_three">Heading 3</string>
+
+    <string name="str_boarding_footer_type_one">Footer 1</string>
+    <string name="str_boarding_footer_type_two">Footer 2</string>
+    <string name="str_boarding_footer_type_three">Footer 3</string>
+
 
     <!--Flat details-->
     <string name="str_flat">Flat details</string>
     <string name="str_progress_flat_title">Creating new flat</string>
-
 
 
     <string name="fab_behavior">com.easy.make.tenantmaker.component.FabBehavior</string>

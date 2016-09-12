@@ -39,7 +39,7 @@ public class TenantListActivity extends BaseActivity {
                 Dependencies.INSTANCE.getAnalytics(),
                 new AndroidNavigator(this),
                 Dependencies.INSTANCE.getErrorLogger(),
-                args.getString(UtilBundles.EXTRA_QUERY_TEXT),
+                args.getString(UtilBundles.EXTRA_TEXT),
                 true
         );
     }

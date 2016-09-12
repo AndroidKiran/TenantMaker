@@ -36,8 +36,8 @@ public class FirebaseFlatDatabase implements FlatDatabase {
     }
 
     @Override
-    public Observable<Flat> writeFlat(Flat newFlat, User user) {
-        return firebaseObservableListeners.setValue(newFlat, flatDb.child(user.getId()).push(), newFlat);
+    public Observable<Flat> writeFlat(Flat newFlat) {
+        return firebaseObservableListeners.setValue(newFlat, flatDb.push(), newFlat);
     }
 
     private static Func1<DataSnapshot, Flats> getFlats(){
@@ -49,6 +49,7 @@ public class FirebaseFlatDatabase implements FlatDatabase {
                     Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                     for (DataSnapshot child : children){
                         Flat flat = (Flat) child.getValue(Flat.class);
+                        flat.setId(child.getKey());
                         flats.add(flat);
                     }
                 }

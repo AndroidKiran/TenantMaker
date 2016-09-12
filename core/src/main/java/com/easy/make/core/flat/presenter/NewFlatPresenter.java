@@ -1,5 +1,7 @@
 package com.easy.make.core.flat.presenter;
 
+import com.easy.make.core.Utils.GsonService;
+import com.easy.make.core.Utils.PreferenceService;
 import com.easy.make.core.analytics.Analytics;
 import com.easy.make.core.analytics.ErrorLogger;
 import com.easy.make.core.database.DatabaseResult;
@@ -25,6 +27,8 @@ public class NewFlatPresenter {
     private final ErrorLogger errorLogger;
     private final Analytics analytics;
     private final LoginService loginService;
+    private final PreferenceService preferenceService;
+    private final GsonService gsonService;
 
     private CompositeSubscription subscriptions = new CompositeSubscription();
     private User user;
@@ -35,13 +39,17 @@ public class NewFlatPresenter {
                             LoginService  loginService,
                             Navigator navigator,
                             ErrorLogger errorLogger,
-                            Analytics analytics){
+                            Analytics analytics,
+                            PreferenceService preferenceService,
+                            GsonService gsonService){
         this.newFlatDisplayer = newFlatDisplayer;
         this.flatService = flatService;
         this.loginService = loginService;
         this.navigator = navigator;
         this.errorLogger = errorLogger;
         this.analytics = analytics;
+        this.preferenceService = preferenceService;
+        this.gsonService = gsonService;
     }
 
     public void startPresenting(){
@@ -64,10 +72,16 @@ public class NewFlatPresenter {
         @Override
         public void onCreateFlatClicked(Flat flat) {
             newFlatDisplayer.showProgress();
-            flatService.createNewFlat(flat, user).subscribe(new Action1<DatabaseResult<Flat>>() {
+            flat.setOwnId(user.getId());
+            flatService.createNewFlat(flat).subscribe(new Action1<DatabaseResult<Flat>>() {
                 @Override
                 public void call(DatabaseResult<Flat> flatDatabaseResult) {
                     newFlatDisplayer.dismissProgress();
+                    if (!preferenceService.getFirstFlowValue()){
+                        preferenceService.setFirstFlowPreference(true);
+                        navigator.toMain();
+                    } else {
+                    }
                 }
             });
         }

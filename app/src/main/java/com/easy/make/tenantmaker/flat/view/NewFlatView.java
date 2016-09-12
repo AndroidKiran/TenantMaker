@@ -162,7 +162,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.save_tenant_btn:
+                case R.id.save_flat_btn:
                     System.out.println("saved click");
                     if (validateForm()) {
                         flatCreationListener.onCreateFlatClicked(formToFlat());

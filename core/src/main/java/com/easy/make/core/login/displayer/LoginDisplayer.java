@@ -2,6 +2,8 @@ package com.easy.make.core.login.displayer;
 
 public interface LoginDisplayer {
 
+    void setUpViewPager();
+
     void attach(LoginActionListener actionListener);
 
     void detach(LoginActionListener actionListener);

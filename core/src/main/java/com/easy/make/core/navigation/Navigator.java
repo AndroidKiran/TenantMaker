@@ -17,4 +17,8 @@ public interface Navigator {
     void toLogin();
 
     void toParent();
+
+    void toNewFlat();
+
+    void toMain();
 }

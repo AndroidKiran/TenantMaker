@@ -52,6 +52,7 @@ dependencies {
     compile 'com.wdullaer:materialdatetimepicker:2.3.0'
     compile 'com.novoda:notils:2.2.16'
     compile 'com.bignerdranch.android:simple-item-decoration:1.0.0'
+    compile 'com.google.code.gson:gson:2.2.+'
 
     testCompile 'junit:junit:4.12'
 }

@@ -7,52 +7,52 @@
         android:id="@+id/tenant_avatar"
         android:layout_width="@dimen/dimen_40"
         android:layout_height="@dimen/dimen_40"
-        android:scaleType="fitCenter"
         android:layout_marginRight="@dimen/dimen_16"
-        app:srcCompat="@drawable/ic_person_add_white"/>
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_person_add_white" />
 
     <LinearLayout
         android:id="@+id/tenantDetailsLayour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/tenant_avatar">
+        android:layout_toRightOf="@id/tenant_avatar"
+        android:orientation="vertical">
 
         <com.easy.make.tenantmaker.component.text.TextView
             android:id="@+id/tenant_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Arnold Randy"
-            app:fontTypeface="museosans500"
-            android:paddingBottom="@dimen/dimen_5"
-            android:textColor="@color/grey_charcoal"
             android:ellipsize="end"
             android:maxLines="1"
+            android:paddingBottom="@dimen/dimen_5"
             android:paddingTop="@dimen/dimen_5"
-            android:textSize="@dimen/font_16"/>
+            android:textColor="@color/grey_charcoal"
+            android:textSize="@dimen/font_16"
+            app:fontTypeface="museosans500"
+            tools:text="Arnold Randy" />
 
         <com.easy.make.tenantmaker.component.text.TextView
             android:id="@+id/tenant_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:paddingBottom="@dimen/dimen_5"
             android:textColor="@color/grey_cool"
-            tools:text="Shri Sai Paying Guest"
-            android:maxLines="2"
-            android:ellipsize="end"
+            android:textSize="@dimen/font_14"
             app:fontTypeface="museosans500"
-            android:textSize="@dimen/font_14"/>
+            tools:text="Shri Sai Paying Guest" />
 
         <com.easy.make.tenantmaker.component.text.TextView
             android:id="@+id/tenant_room_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/dimen_5"
             android:maxLines="1"
+            android:paddingBottom="@dimen/dimen_5"
             android:textColor="@color/grey_cool"
-            tools:text="Room num - 45"
+            android:textSize="@dimen/font_14"
             app:fontTypeface="museosans500"
-            android:textSize="@dimen/font_14"/>
+            tools:text="Room num - 45" />
 
     </LinearLayout>
 

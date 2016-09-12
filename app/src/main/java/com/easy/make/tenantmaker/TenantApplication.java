@@ -2,8 +2,6 @@ package com.easy.make.tenantmaker;
 
 import android.app.Application;
 
-import com.easy.make.tenantmaker.utils.AppPreferences;
-
 import java.util.Locale;
 
 /**
@@ -13,14 +11,14 @@ public class TenantApplication extends Application {
 
     private static TenantApplication sInstance;
     private Locale current;
-    private AppPreferences appPreferences;
+//    private AppPreferences appPreferences;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        appPreferences = new AppPreferences(this);
+//        appPreferences = new AppPreferences(this);
     }
 
     public static synchronized TenantApplication getInstance() {
@@ -34,7 +32,7 @@ public class TenantApplication extends Application {
         return current;
     }
 
-    public AppPreferences getAppPreferences() {
-        return appPreferences;
-    }
+//    public AppPreferences getAppPreferences() {
+//        return appPreferences;
+//    }
 }
