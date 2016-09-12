@@ -13,8 +13,6 @@ import rx.Observable;
  */
 public interface TenantService {
 
-    Observable<DatabaseResult<Tenants>> getTenantsFor(User user);
-
     Observable<Tenants> getTenants(User user);
 
     Observable<Tenants> getTenants(User user, String query);

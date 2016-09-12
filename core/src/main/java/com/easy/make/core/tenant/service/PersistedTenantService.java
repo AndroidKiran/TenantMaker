@@ -22,11 +22,6 @@ public class PersistedTenantService implements TenantService {
     }
 
     @Override
-    public Observable<DatabaseResult<Tenants>> getTenantsFor(User user) {
-        return null;
-    }
-
-    @Override
     public Observable<Tenants> getTenants(User user) {
         return tenantDatabase.observeTenantsFor(user);
     }

@@ -1,4 +1,4 @@
-package com.easy.make.tenantmaker.flats;
+package com.easy.make.tenantmaker.flat;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

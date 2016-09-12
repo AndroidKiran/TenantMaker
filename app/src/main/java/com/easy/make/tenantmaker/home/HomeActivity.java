@@ -9,7 +9,7 @@ import com.easy.make.tenantmaker.BaseActivity;
 import com.easy.make.tenantmaker.Dependencies;
 import com.easy.make.tenantmaker.R;
 import com.easy.make.tenantmaker.component.ViewPagerAdapter;
-import com.easy.make.tenantmaker.flats.FlatListFragment;
+import com.easy.make.tenantmaker.flat.FlatListFragment;
 import com.easy.make.tenantmaker.home.view.HomeView;
 import com.easy.make.tenantmaker.navigation.AndroidNavigator;
 import com.easy.make.tenantmaker.tenants.TenantListFragment;

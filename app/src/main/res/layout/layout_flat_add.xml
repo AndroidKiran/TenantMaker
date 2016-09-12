@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.easy.make.tenantmaker.component.text.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dimen_10"
+        android:paddingLeft="@dimen/dimen_16"
+        android:paddingRight="@dimen/dimen_16"
+        android:paddingTop="@dimen/dimen_10"
+        android:text="@string/str_basic_details"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/font_16"
+        app:fontTypeface="museosans700" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dimen_10"
+        android:paddingTop="@dimen/dimen_10">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/flat_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            app:theme="@style/AppTheme.TextInputLayout">
+
+            <com.easy.make.tenantmaker.component.text.EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/str_last_name"
+                android:inputType="textPersonName"
+                android:maxLength="40"
+                android:textSize="@dimen/font_16"
+                app:fontTypeface="museosans500" />
+        </android.support.design.widget.TextInputLayout>
+
+        <com.easy.make.tenantmaker.component.text.TextView
+            android:id="@+id/err_flat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:text="@string/err_valid_last_name"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/font_12"
+            android:visibility="gone"
+            app:fontTypeface="museosans500" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/flat_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            app:theme="@style/AppTheme.TextInputLayout">
+
+            <com.easy.make.tenantmaker.component.text.EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/str_address"
+                android:inputType="text|textMultiLine"
+                android:lines="3"
+                android:maxLength="120"
+                android:maxLines="3"
+                android:textSize="@dimen/font_16"
+                app:fontTypeface="museosans500" />
+        </android.support.design.widget.TextInputLayout>
+
+        <com.easy.make.tenantmaker.component.text.TextView
+            android:id="@+id/err_flat_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_16"
+            android:paddingRight="@dimen/dimen_16"
+            android:text="@string/err_valid_address"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/font_12"
+            android:visibility="gone"
+            app:fontTypeface="museosans500" />
+    </LinearLayout>
+
+
+    <com.easy.make.tenantmaker.component.text.TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dimen_10"
+        android:paddingLeft="@dimen/dimen_16"
+        android:paddingRight="@dimen/dimen_16"
+        android:paddingTop="@dimen/dimen_10"
+        android:text="@string/str_offical_details"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/font_16"
+        app:fontTypeface="museosans700" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dimen_10"
+        android:paddingTop="@dimen/dimen_10">
+
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/save_flat_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/dimen_16"
+        android:layout_marginLeft="@dimen/dimen_16"
+        android:layout_marginRight="@dimen/dimen_16"
+        android:layout_marginTop="@dimen/dimen_16"
+        android:background="@drawable/selector_green"
+        android:gravity="center"
+        android:minHeight="@dimen/dimen_48"
+        android:text="@string/str_save"
+        android:textColor="@color/material_login_login_color"
+        android:textSize="@dimen/font_16" />
+
+
+</LinearLayout>

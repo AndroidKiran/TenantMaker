@@ -5,6 +5,8 @@ import android.content.Context;
 import com.easy.make.core.Config;
 import com.easy.make.core.analytics.Analytics;
 import com.easy.make.core.analytics.ErrorLogger;
+import com.easy.make.core.flat.service.FlatService;
+import com.easy.make.core.flat.service.PersistedFlatService;
 import com.easy.make.core.login.service.FirebaseLoginService;
 import com.easy.make.core.login.service.LoginService;
 import com.easy.make.core.tenant.service.PersistedTenantService;
@@ -13,6 +15,7 @@ import com.easy.make.core.user.service.PersistedUserService;
 import com.easy.make.core.user.service.UserService;
 import com.easy.make.tenantmaker.analytics.FirebaseAnalyticsAnalytics;
 import com.easy.make.tenantmaker.analytics.FirebaseErrorLogger;
+import com.easy.make.tenantmaker.flat.database.FirebaseFlatDatabase;
 import com.easy.make.tenantmaker.login.database.FirebaseAuthDatabase;
 import com.easy.make.tenantmaker.rx.FirebaseObservableListeners;
 import com.easy.make.tenantmaker.tenants.database.FirebaseTenantDatabase;
@@ -33,6 +36,7 @@ public enum Dependencies {
     private UserService userService;
     private Config config;
     private PersistedTenantService tenantService;
+    private PersistedFlatService flatService;
 
     public void init(Context context) {
         if (needsInitialisation()) {
@@ -49,6 +53,7 @@ public enum Dependencies {
             loginService = new FirebaseLoginService(new FirebaseAuthDatabase(firebaseAuth), userDatabase);
             tenantService = new PersistedTenantService(new FirebaseTenantDatabase(firebaseDatabase, firebaseObservableListeners));
             userService = new PersistedUserService(userDatabase);
+            flatService = new PersistedFlatService(new FirebaseFlatDatabase(firebaseDatabase, firebaseObservableListeners));
             config = FirebaseConfig.newInstance().init(errorLogger);
         }
     }
@@ -76,6 +81,10 @@ public enum Dependencies {
 
     public UserService getUserService() {
         return userService;
+    }
+
+    public FlatService getFlatService() {
+        return flatService;
     }
 
     public ErrorLogger getErrorLogger() {

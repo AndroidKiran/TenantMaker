@@ -3,7 +3,6 @@ package com.easy.make.core.tenant.presenter;
 
 import com.easy.make.core.analytics.Analytics;
 import com.easy.make.core.analytics.ErrorLogger;
-import com.easy.make.core.database.DatabaseResult;
 import com.easy.make.core.login.data.model.Authentication;
 import com.easy.make.core.login.service.LoginService;
 import com.easy.make.core.navigation.Navigator;
@@ -94,16 +93,6 @@ public class TenantPresenter {
             }
         };
     }
-
-    private Func1<Authentication, Observable<DatabaseResult<Tenants>>> tenantsForUser() {
-        return new Func1<Authentication, Observable<DatabaseResult<Tenants>>>() {
-            @Override
-            public Observable<DatabaseResult<Tenants>> call(Authentication authentication) {
-                return tenantService.getTenantsFor(authentication.getUser());
-            }
-        };
-    }
-
 
     private Func1<Authentication, Observable<Tenants>> getTenantsForUser(){
         return new Func1<Authentication, Observable<Tenants>>() {

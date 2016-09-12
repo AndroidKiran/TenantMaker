@@ -5,6 +5,7 @@ public class Tenant {
     public static final String OWNER_ID = "ownId";
     public static final String FIRST_NAME = "firstName";
 
+    private String id;
     private String firstName;
     private String lastName;
     private String mobile;
@@ -94,5 +95,13 @@ public class Tenant {
 
     public void setPgOrFlatNum(String pgOrFlatNum) {
         this.pgOrFlatNum = pgOrFlatNum;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

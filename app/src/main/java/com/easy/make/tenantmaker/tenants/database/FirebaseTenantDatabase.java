@@ -54,6 +54,7 @@ public class FirebaseTenantDatabase implements TenantDatabase {
                     Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                     for (DataSnapshot child : children) {
                         Tenant tenant = (Tenant) child.getValue(Tenant.class);
+                        tenant.setId(child.getKey());
                         tenants.add(tenant);
                     }
                 }
