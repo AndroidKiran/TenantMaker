@@ -38,6 +38,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${android_support_lib_version}"
     //Google Play Services
     compile "com.google.android.gms:play-services-auth:${play_service_lib_version}"
+    compile "com.google.android.gms:play-services-maps:${play_service_lib_version}"
 
     compile "com.google.firebase:firebase-auth:${play_service_lib_version}"
     compile "com.google.firebase:firebase-database:${play_service_lib_version}"
