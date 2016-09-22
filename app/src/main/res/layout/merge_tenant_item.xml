@@ -18,7 +18,7 @@
         android:layout_toRightOf="@id/tenant_avatar"
         android:orientation="vertical">
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/tenant_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             app:fontTypeface="museosans500"
             tools:text="Arnold Randy" />
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/tenant_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             app:fontTypeface="museosans500"
             tools:text="Shri Sai Paying Guest" />
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/tenant_room_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

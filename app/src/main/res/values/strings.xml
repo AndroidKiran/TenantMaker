@@ -83,7 +83,7 @@
     <string name="str_progress_flat_title">Creating new flat</string>
 
 
-    <string name="fab_behavior">com.easy.make.tenantmaker.component.FabBehavior</string>
+    <string name="fab_behavior">com.easy.make.tenantmaker.base.component.FabBehavior</string>
 
 
 

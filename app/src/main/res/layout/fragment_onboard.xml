@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.easy.make.tenantmaker.component.text.TextView
+    <com.easy.make.tenantmaker.base.component.text.TextView
         android:id="@+id/txt_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         tools:background="@drawable/common_plus_signin_btn_text_dark_focused"
         tools:srcCompat="@drawable/common_plus_signin_btn_text_dark_focused"/>
 
-    <com.easy.make.tenantmaker.component.text.TextView
+    <com.easy.make.tenantmaker.base.component.text.TextView
         android:id="@+id/txt_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

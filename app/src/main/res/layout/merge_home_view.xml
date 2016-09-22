@@ -15,7 +15,7 @@
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
-        <com.easy.make.tenantmaker.component.HomeTabLayout
+        <com.easy.make.tenantmaker.base.component.HomeTabLayout
             android:id="@+id/tab_layout"
             style="@style/TabLayout.standardTabs"
             android:layout_width="match_parent"

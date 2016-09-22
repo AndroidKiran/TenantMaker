@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.easy.make.tenantmaker.component.text.TextView
+    <com.easy.make.tenantmaker.base.component.text.TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             app:theme="@style/AppTheme.TextInputLayout">
 
-            <com.easy.make.tenantmaker.component.text.EditText
+            <com.easy.make.tenantmaker.base.component.text.EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/str_email"
@@ -45,7 +45,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/err_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             android:layout_marginTop="@dimen/dimen_10"
             app:theme="@style/AppTheme.TextInputLayout">
 
-            <com.easy.make.tenantmaker.component.text.EditText
+            <com.easy.make.tenantmaker.base.component.text.EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="@string/str_alphabets"
@@ -78,7 +78,7 @@
                 app:fontTypeface="museosans500" />
         </android.support.design.widget.TextInputLayout>
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/err_first_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
             android:layout_marginTop="@dimen/dimen_10"
             app:theme="@style/AppTheme.TextInputLayout">
 
-            <com.easy.make.tenantmaker.component.text.EditText
+            <com.easy.make.tenantmaker.base.component.text.EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/str_last_name"
@@ -109,7 +109,7 @@
                 app:fontTypeface="museosans500" />
         </android.support.design.widget.TextInputLayout>
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/err_last_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
             android:layout_marginTop="@dimen/dimen_10"
             app:theme="@style/AppTheme.TextInputLayout">
 
-            <com.easy.make.tenantmaker.component.text.EditText
+            <com.easy.make.tenantmaker.base.component.text.EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/str_mobile"
@@ -141,7 +141,7 @@
                 app:fontTypeface="museosans500" />
         </android.support.design.widget.TextInputLayout>
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/err_mobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
             android:layout_marginTop="@dimen/dimen_10"
             app:theme="@style/AppTheme.TextInputLayout">
 
-            <com.easy.make.tenantmaker.component.text.EditText
+            <com.easy.make.tenantmaker.base.component.text.EditText
                 android:id="@+id/tenant_address_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                 app:fontTypeface="museosans500" />
         </android.support.design.widget.TextInputLayout>
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/err_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -192,7 +192,7 @@
     </LinearLayout>
 
 
-    <com.easy.make.tenantmaker.component.text.TextView
+    <com.easy.make.tenantmaker.base.component.text.TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -214,14 +214,13 @@
         android:paddingBottom="@dimen/dimen_10"
         android:paddingTop="@dimen/dimen_10">
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/tenant_rent_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dimen_18"
             android:layout_marginRight="@dimen/dimen_16"
-            android:drawableRight="@drawable/ic_drop_drown_grey"
             android:gravity="center_vertical"
             android:hint="@string/str_admission_date"
             android:paddingBottom="10dp"
@@ -231,7 +230,7 @@
             android:textSize="@dimen/font_16"
             app:fontTypeface="museosans500" />
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/err_rent_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -265,7 +264,7 @@
             app:ms_multiline="false"
             app:ms_thickness="@dimen/dimen_0.5" />
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/err_pg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -286,7 +285,7 @@
             android:layout_marginTop="@dimen/dimen_10"
             app:theme="@style/AppTheme.TextInputLayout">
 
-            <com.easy.make.tenantmaker.component.text.EditText
+            <com.easy.make.tenantmaker.base.component.text.EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/str_room_num"
@@ -295,7 +294,7 @@
                 app:fontTypeface="museosans500" />
         </android.support.design.widget.TextInputLayout>
 
-        <com.easy.make.tenantmaker.component.text.TextView
+        <com.easy.make.tenantmaker.base.component.text.TextView
             android:id="@+id/err_room_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
