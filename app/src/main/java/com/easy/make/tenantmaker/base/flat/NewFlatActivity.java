@@ -28,6 +28,8 @@ public class NewFlatActivity extends BaseActivity {
         setContentView(R.layout.activity_new_flat);
         newFlatView = (NewFlatView) findViewById(R.id.create_new_flat);
         newFlatView.setAppCompatActivity(this);
+        newFlatView.setMap();
+
         final LocationRequest locationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setNumUpdates(5)
@@ -44,6 +46,9 @@ public class NewFlatActivity extends BaseActivity {
                 new ReactiveLocationProviderImpl(this),
                 locationRequest);
 
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
     }
 
 
@@ -58,5 +63,4 @@ public class NewFlatActivity extends BaseActivity {
         newFlatPresenter.stopPresenting();
         super.onStop();
     }
-
 }

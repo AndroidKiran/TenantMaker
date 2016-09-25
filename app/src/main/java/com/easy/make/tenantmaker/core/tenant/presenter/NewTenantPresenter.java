@@ -64,7 +64,6 @@ public class NewTenantPresenter {
             tenantService.createNewTenant(tenant, user).subscribe(new Action1<DatabaseResult<Tenant>>() {
                 @Override
                 public void call(DatabaseResult<Tenant> tenantDatabaseResult) {
-                    System.out.print(""+tenantDatabaseResult.getData());
                     newTenantDisplayer.dismissProgress();
                 }
             });

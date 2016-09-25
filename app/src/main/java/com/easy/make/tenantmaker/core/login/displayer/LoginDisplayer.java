@@ -2,6 +2,10 @@ package com.easy.make.tenantmaker.core.login.displayer;
 
 public interface LoginDisplayer {
 
+    void showProgress();
+
+    void dismissProgress();
+
     void setUpViewPager();
 
     void attach(LoginActionListener actionListener);
@@ -10,7 +14,7 @@ public interface LoginDisplayer {
 
     void showAuthenticationError(String message);
 
-    public interface LoginActionListener {
+    interface LoginActionListener {
 
         void onGooglePlusLoginSelected();
 

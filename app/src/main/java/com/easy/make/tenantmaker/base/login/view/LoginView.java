@@ -33,6 +33,16 @@ public class LoginView extends LinearLayout implements LoginDisplayer {
     }
 
     @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void dismissProgress() {
+
+    }
+
+    @Override
     public void setUpViewPager() {
         viewPager.setAdapter(getViewPagerAdapter());
         viewPager.setOffscreenPageLimit(3);

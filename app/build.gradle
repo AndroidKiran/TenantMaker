@@ -18,7 +18,8 @@ android {
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
-        resValue "string", "API_KEY", getGooglePlayServicesApiKey()
+        multiDexEnabled true
+//        resValue "string", "API_KEY", getGooglePlayServicesApiKey()
     }
 
     buildTypes {
@@ -34,6 +35,10 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE'
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
@@ -47,7 +52,7 @@ dependencies {
     compile "com.google.android.gms:play-services-auth:${play_service_lib_version}"
     compile "com.google.android.gms:play-services-maps:${play_service_lib_version}"
     compile "com.google.android.gms:play-services-location:${play_service_lib_version}"
-    compile "com.android.support:support-vector-drawable:${android_support_lib_version}"
+//    compile "com.android.support:support-vector-drawable:${android_support_lib_version}"
 
 
     compile "com.google.firebase:firebase-auth:${play_service_lib_version}"
@@ -62,14 +67,20 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    testCompile 'junit:junit:4.12'
+
+
+
+
     compile 'io.reactivex:rxjava:1.1.5'
     compile 'com.jakewharton.rxrelay:rxrelay:1.1.0'
-    compile 'com.google.code.gson:gson:2.2.+'
+    compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.lapism:searchview:3.6'
     compile 'com.wdullaer:materialdatetimepicker:2.3.0'
     compile 'com.novoda:notils:2.2.16'
     compile 'com.bignerdranch.android:simple-item-decoration:1.0.0'
-    compile 'com.google.android.gms:play-services-auth:9.4.0'
+    compile 'com.google.android.gms:play-services:9.6.0'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:multidex:1.0.0'
+    testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -39,7 +39,7 @@ public class HomePresenter {
                     navigator.toCreateTenant();
                     break;
                 case 1:
-                    System.out.println("Pg selected");
+                    navigator.toNewFlat();
                     break;
             }
         }

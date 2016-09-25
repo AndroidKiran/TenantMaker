@@ -83,7 +83,9 @@ public class NewFlatPresenter {
         newFlatDisplayer.detach(flatCreationListener);
         subscriptions.clear();
         subscriptions = new CompositeSubscription();
-        geoCodeSubscription.unsubscribe();
+        if (geoCodeSubscription != null){
+            geoCodeSubscription.unsubscribe();
+        }
     }
 
     final NewFlatDisplayer.FlatCreationListener flatCreationListener = new NewFlatDisplayer.FlatCreationListener() {
@@ -124,6 +126,7 @@ public class NewFlatPresenter {
                     @Override
                     public void call(Address address) {
                         if (address != null){
+                            newFlatDisplayer.setMarker(address);
                             setLatitude(address.getLatitude());
                             setLongitude(address.getLongitude());
                         }

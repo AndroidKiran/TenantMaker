@@ -1,13 +1,13 @@
 package com.easy.make.tenantmaker.base;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import java.util.Locale;
 
 /**
  * Created by ravi on 28/06/16.
  */
-public class TenantApplication extends Application {
+public class TenantApplication extends MultiDexApplication {
 
     private static TenantApplication sInstance;
     private Locale current;

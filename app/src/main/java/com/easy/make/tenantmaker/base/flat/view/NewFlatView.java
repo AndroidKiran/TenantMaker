@@ -1,6 +1,7 @@
 package com.easy.make.tenantmaker.base.flat.view;
 
 import android.content.Context;
+import android.location.Address;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,12 @@ import com.easy.make.tenantmaker.base.component.materialcomponent.MaterialProgre
 import com.easy.make.tenantmaker.base.utils.DialogUtils;
 import com.easy.make.tenantmaker.core.flat.displayer.NewFlatDisplayer;
 import com.easy.make.tenantmaker.core.flat.model.Flat;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.novoda.notils.caster.Views;
 
 /**
@@ -38,6 +45,8 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     private AppCompatTextView errAddressText;
     private AppCompatActivity appCompatActivity;
     private MaterialProgressDialog materialProgressDialog;
+    private GoogleMap mGoogleMap;
+    private SupportMapFragment mapFragment;
 
     public NewFlatView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -51,6 +60,11 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         View.inflate(getContext(), R.layout.merge_new_flat_view, this);
         setToolbar();
         initControls();
+    }
+
+    public void setMap() {
+        mapFragment = (SupportMapFragment) getAppCompatActivity().getSupportFragmentManager()
+                .findFragmentById(R.id.map);
     }
 
     void setToolbar() {
@@ -77,6 +91,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         flatNameEditText.addTextChangedListener(textWatcher);
         addressEditText.addTextChangedListener(textWatcher);
         createFlatBtn.setOnClickListener(onClickListener);
+        mapFragment.getMapAsync(onMapReadyCallback);
         this.flatCreationListener = flatCreationListener;
     }
 
@@ -86,6 +101,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         createFlatBtn.setOnClickListener(null);
         flatNameEditText.addTextChangedListener(null);
         addressEditText.addTextChangedListener(null);
+        mapFragment.getMapAsync(null);
         this.flatCreationListener = null;
     }
 
@@ -188,6 +204,24 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
 
     public void setAppCompatActivity(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
+    }
+
+    OnMapReadyCallback onMapReadyCallback = new OnMapReadyCallback() {
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mGoogleMap = googleMap;
+        }
+    };
+
+    @Override
+    public void setMarker(Address address){
+        if (mGoogleMap != null){
+            mGoogleMap.clear();
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mGoogleMap.addMarker(new MarkerOptions().position(latLng));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+        }
+
     }
 
 }

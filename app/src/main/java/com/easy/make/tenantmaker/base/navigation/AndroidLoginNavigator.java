@@ -60,7 +60,7 @@ public class AndroidLoginNavigator implements LoginNavigator {
 
     @Override
     public void toNewFlat() {
-
+        navigator.toNewFlat();
     }
 
     @Override
