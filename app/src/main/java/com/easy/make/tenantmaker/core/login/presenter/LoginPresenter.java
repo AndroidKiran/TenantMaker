@@ -57,7 +57,7 @@ public class LoginPresenter {
                     @Override
                     public void call(Authentication authentication) {
                         if (authentication.isSuccess()) {
-                            preferenceService.setLoginUserPreference(gsonService.toString(authentication.getUser()));
+                            loginDisplayer.saveUserPreference(preferenceService, gsonService, authentication.getUser());
                         } else {
                             errorLogger.reportError(authentication.getFailure(), "Authentication failed");
                             loginDisplayer.showAuthenticationError(authentication.getFailure().getLocalizedMessage()); //TODO improve error display
@@ -68,11 +68,8 @@ public class LoginPresenter {
                 .subscribe(new Action1<Flats>() {
                     @Override
                     public void call(Flats flats) {
-                        if (flats != null && flats.size() > 0){
-                            preferenceService.setFirstFlowPreference(true);
-                        } else {
-                            preferenceService.setFirstFlowPreference(false);
-                        }
+                        loginDisplayer.saveFirstFlowPreference(preferenceService, gsonService, flats != null && flats.size() > 0 ? true : false);
+                        loginDisplayer.dismissProgress();
                         navigator.toMain();
                     }
                 });
@@ -94,6 +91,7 @@ public class LoginPresenter {
         navigator.detach(loginResultListener);
         loginDisplayer.detach(actionListener);
         subscription.unsubscribe(); //TODO handle checks
+        loginDisplayer.dismissProgress();
     }
 
     private final LoginDisplayer.LoginActionListener actionListener = new LoginDisplayer.LoginActionListener() {
@@ -110,12 +108,14 @@ public class LoginPresenter {
         @Override
         public void onGooglePlusLoginSuccess(String tokenId) {
 //            analytics.trackSignInSuccessful("google");
+            loginDisplayer.showProgress();
             loginService.loginWithGoogle(tokenId);
         }
 
         @Override
         public void onGooglePlusLoginFailed(String statusMessage) {
             loginDisplayer.showAuthenticationError(statusMessage);
+            loginDisplayer.dismissProgress();
         }
     };
 

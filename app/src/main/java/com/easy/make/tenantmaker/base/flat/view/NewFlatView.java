@@ -65,6 +65,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     public void setMap() {
         mapFragment = (SupportMapFragment) getAppCompatActivity().getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(onMapReadyCallback);
     }
 
     void setToolbar() {
@@ -91,7 +92,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         flatNameEditText.addTextChangedListener(textWatcher);
         addressEditText.addTextChangedListener(textWatcher);
         createFlatBtn.setOnClickListener(onClickListener);
-        mapFragment.getMapAsync(onMapReadyCallback);
+//        mapFragment.getMapAsync(onMapReadyCallback);
         this.flatCreationListener = flatCreationListener;
     }
 
@@ -101,7 +102,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         createFlatBtn.setOnClickListener(null);
         flatNameEditText.addTextChangedListener(null);
         addressEditText.addTextChangedListener(null);
-        mapFragment.getMapAsync(null);
+//        mapFragment.getMapAsync(null);
         this.flatCreationListener = null;
     }
 

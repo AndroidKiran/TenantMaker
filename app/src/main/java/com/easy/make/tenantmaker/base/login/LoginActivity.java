@@ -31,6 +31,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         LoginView loginView = (LoginView) findViewById(R.id.login_view);
+        loginView.setAppCompatActivity(this);
         loginView.setViewPagerAdapter(getViewPagerAdapter(savedInstanceState));
 
         LoginGoogleApiClient loginGoogleApiClient = new LoginGoogleApiClient(this);

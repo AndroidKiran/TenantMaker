@@ -45,10 +45,6 @@ public class NewFlatActivity extends BaseActivity {
                 Dependencies.INSTANCE.getGsonService(),
                 new ReactiveLocationProviderImpl(this),
                 locationRequest);
-
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
     }
 
 

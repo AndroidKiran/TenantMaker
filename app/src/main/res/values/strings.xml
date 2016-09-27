@@ -67,6 +67,8 @@
     <string name="login_failed">Login failed! Try again!</string>
 
     <string name="user_exists">User already logged in</string>
+    <string name="str_progress_login_title">Loging Inn</string>
+
 
     <!--Onboarding-->
     <string name="str_boarding_heading_type_one">Heading 1</string>
