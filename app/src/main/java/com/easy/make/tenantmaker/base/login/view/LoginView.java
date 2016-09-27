@@ -12,10 +12,7 @@ import com.easy.make.tenantmaker.R;
 import com.easy.make.tenantmaker.base.component.ViewPagerAdapter;
 import com.easy.make.tenantmaker.base.component.materialcomponent.MaterialProgressDialog;
 import com.easy.make.tenantmaker.base.utils.DialogUtils;
-import com.easy.make.tenantmaker.core.Utils.GsonService;
-import com.easy.make.tenantmaker.core.Utils.PreferenceService;
 import com.easy.make.tenantmaker.core.login.displayer.LoginDisplayer;
-import com.easy.make.tenantmaker.core.user.data.model.User;
 import com.novoda.notils.caster.Views;
 
 
@@ -41,29 +38,9 @@ public class LoginView extends LinearLayout implements LoginDisplayer {
     }
 
     @Override
-    public void saveUserPreference(PreferenceService preferenceService, GsonService gsonService, User user) {
-        preferenceService.setLoginUserPreference(gsonService.toString(user));
-    }
-
-    @Override
-    public void saveFirstFlowPreference(PreferenceService preferenceService, GsonService gsonService, boolean b) {
-
-    }
-
-    @Override
-    public void showFlatViewComponent() {
-
-    }
-
-    @Override
-    public void hideFlatViewComponent() {
-
-    }
-
-    @Override
     public void showProgress() {
         materialProgressDialog =  new MaterialProgressDialog(getAppCompatActivity());
-        DialogUtils.showMaterialProgressDialog(materialProgressDialog, getAppCompatActivity().getString(R.string.str_progress_tenant_title), getAppCompatActivity().getString(R.string.str_progress_wait), getAppCompatActivity());
+        DialogUtils.showMaterialProgressDialog(materialProgressDialog, getAppCompatActivity().getString(R.string.str_progress_login_title), getAppCompatActivity().getString(R.string.str_progress_wait), getAppCompatActivity());
     }
 
     @Override

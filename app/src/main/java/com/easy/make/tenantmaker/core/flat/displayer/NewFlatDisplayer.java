@@ -3,6 +3,7 @@ package com.easy.make.tenantmaker.core.flat.displayer;
 
 import android.location.Address;
 
+import com.easy.make.tenantmaker.core.Utils.PreferenceService;
 import com.easy.make.tenantmaker.core.flat.model.Flat;
 
 /**
@@ -19,6 +20,8 @@ public interface NewFlatDisplayer {
     void dismissProgress();
 
     void setMarker(Address address);
+
+    void toggleViewVisibility(PreferenceService preferenceService);
 
     void clear();
 

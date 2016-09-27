@@ -18,6 +18,7 @@ import android.widget.EditText;
 import com.easy.make.tenantmaker.R;
 import com.easy.make.tenantmaker.base.component.materialcomponent.MaterialProgressDialog;
 import com.easy.make.tenantmaker.base.utils.DialogUtils;
+import com.easy.make.tenantmaker.core.Utils.PreferenceService;
 import com.easy.make.tenantmaker.core.flat.displayer.NewFlatDisplayer;
 import com.easy.make.tenantmaker.core.flat.model.Flat;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -71,7 +72,6 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     void setToolbar() {
         toolbar = Views.findById(this, R.id.toolbar);
         toolbar.setTitle(R.string.str_flat);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
     }
 
     void initControls() {
@@ -223,6 +223,13 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         }
 
+    }
+
+    @Override
+    public void toggleViewVisibility(PreferenceService preferenceService) {
+        if (preferenceService.getFirstFlowValue()){
+            toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        }
     }
 
 }

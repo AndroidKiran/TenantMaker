@@ -11,7 +11,6 @@ import com.easy.make.tenantmaker.base.navigation.AndroidNavigator;
 import com.easy.make.tenantmaker.core.flat.displayer.NewFlatDisplayer;
 import com.easy.make.tenantmaker.core.flat.presenter.NewFlatPresenter;
 import com.easy.make.tenantmaker.location.ReactiveLocationProviderImpl;
-import com.google.android.gms.location.LocationRequest;
 
 
 /**
@@ -30,10 +29,10 @@ public class NewFlatActivity extends BaseActivity {
         newFlatView.setAppCompatActivity(this);
         newFlatView.setMap();
 
-        final LocationRequest locationRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setNumUpdates(5)
-                .setInterval(100);
+//        final LocationRequest locationRequest = LocationRequest.create()
+//                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+//                .setNumUpdates(5)
+//                .setInterval(100);
 
         newFlatPresenter = new NewFlatPresenter((NewFlatDisplayer) newFlatView,
                 Dependencies.INSTANCE.getFlatService(),
@@ -42,9 +41,7 @@ public class NewFlatActivity extends BaseActivity {
                 Dependencies.INSTANCE.getErrorLogger(),
                 Dependencies.INSTANCE.getAnalytics(),
                 Dependencies.INSTANCE.getPreference(),
-                Dependencies.INSTANCE.getGsonService(),
-                new ReactiveLocationProviderImpl(this),
-                locationRequest);
+                new ReactiveLocationProviderImpl(this));
     }
 
 

@@ -2,7 +2,6 @@ package com.easy.make.tenantmaker.core.flat.presenter;
 
 import android.location.Address;
 
-import com.easy.make.tenantmaker.core.Utils.GsonService;
 import com.easy.make.tenantmaker.core.Utils.PreferenceService;
 import com.easy.make.tenantmaker.core.analytics.Analytics;
 import com.easy.make.tenantmaker.core.analytics.ErrorLogger;
@@ -15,7 +14,6 @@ import com.easy.make.tenantmaker.core.login.data.model.Authentication;
 import com.easy.make.tenantmaker.core.login.service.LoginService;
 import com.easy.make.tenantmaker.core.navigation.Navigator;
 import com.easy.make.tenantmaker.core.user.data.model.User;
-import com.google.android.gms.location.LocationRequest;
 
 import java.util.List;
 
@@ -36,9 +34,7 @@ public class NewFlatPresenter {
     private final Analytics analytics;
     private final LoginService loginService;
     private final PreferenceService preferenceService;
-    private final GsonService gsonService;
     private final ReactiveLocationProvider locationProvider;
-    private final LocationRequest locationRequest;
     private double latitude;
     private double longitude;
 
@@ -54,9 +50,8 @@ public class NewFlatPresenter {
                             ErrorLogger errorLogger,
                             Analytics analytics,
                             PreferenceService preferenceService,
-                            GsonService gsonService,
-                            ReactiveLocationProvider locationProvider,
-                            LocationRequest locationRequest){
+                            ReactiveLocationProvider locationProvider){
+
         this.newFlatDisplayer = newFlatDisplayer;
         this.flatService = flatService;
         this.loginService = loginService;
@@ -64,13 +59,12 @@ public class NewFlatPresenter {
         this.errorLogger = errorLogger;
         this.analytics = analytics;
         this.preferenceService = preferenceService;
-        this.gsonService = gsonService;
         this.locationProvider = locationProvider;
-        this.locationRequest = locationRequest;
     }
 
     public void startPresenting(){
         newFlatDisplayer.attach(flatCreationListener);
+        newFlatDisplayer.toggleViewVisibility(preferenceService);
         subscriptions.add(loginService.getAuthentication().subscribe(new Action1<Authentication>() {
             @Override
             public void call(Authentication authentication) {
@@ -92,10 +86,7 @@ public class NewFlatPresenter {
         @Override
         public void onCreateFlatClicked(Flat flat) {
             newFlatDisplayer.showProgress();
-            flat.setOwnId(user.getId());
-            flat.setLongitude(getLongitude());
-            flat.setLatitude(getLatitude());
-            flatService.createNewFlat(flat).subscribe(new Action1<DatabaseResult<Flat>>() {
+            flatService.createNewFlat(updateFlat(flat)).subscribe(new Action1<DatabaseResult<Flat>>() {
                 @Override
                 public void call(DatabaseResult<Flat> flatDatabaseResult) {
                     newFlatDisplayer.dismissProgress();
@@ -144,6 +135,7 @@ public class NewFlatPresenter {
         };
     }
 
+
     public double getLatitude() {
         return latitude;
     }
@@ -158,5 +150,12 @@ public class NewFlatPresenter {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public Flat updateFlat(Flat flat){
+        flat.setOwnId(user.getId());
+        flat.setLongitude(getLongitude());
+        flat.setLatitude(getLatitude());
+        return flat;
     }
 }

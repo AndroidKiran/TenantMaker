@@ -57,7 +57,7 @@ public class LoginPresenter {
                     @Override
                     public void call(Authentication authentication) {
                         if (authentication.isSuccess()) {
-                            loginDisplayer.saveUserPreference(preferenceService, gsonService, authentication.getUser());
+                            preferenceService.setLoginUserPreference(gsonService.toString(authentication.getUser()));
                         } else {
                             errorLogger.reportError(authentication.getFailure(), "Authentication failed");
                             loginDisplayer.showAuthenticationError(authentication.getFailure().getLocalizedMessage()); //TODO improve error display
@@ -68,7 +68,7 @@ public class LoginPresenter {
                 .subscribe(new Action1<Flats>() {
                     @Override
                     public void call(Flats flats) {
-                        loginDisplayer.saveFirstFlowPreference(preferenceService, gsonService, flats != null && flats.size() > 0 ? true : false);
+                        preferenceService.setFirstFlowPreference(true);
                         loginDisplayer.dismissProgress();
                         navigator.toMain();
                     }
