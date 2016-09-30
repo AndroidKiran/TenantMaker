@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import com.easy.make.tenantmaker.R;
@@ -28,6 +29,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.novoda.notils.caster.Views;
+
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 /**
  * Created by ravi on 05/09/16.
@@ -48,6 +51,13 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     private MaterialProgressDialog materialProgressDialog;
     private GoogleMap mGoogleMap;
     private SupportMapFragment mapFragment;
+    private TextInputLayout cityTextInputLayout;
+    private EditText cityEditText;
+    private AppCompatTextView errCityText;
+    private TextInputLayout pinCodeTextInputLayout;
+    private EditText pinCodeEditText;
+    private AppCompatTextView errCountryText;
+    private MaterialSpinner countrySpinner;
 
     public NewFlatView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -61,6 +71,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         View.inflate(getContext(), R.layout.merge_new_flat_view, this);
         setToolbar();
         initControls();
+        setAdapter();
     }
 
     public void setMap() {
@@ -76,14 +87,24 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
 
     void initControls() {
         createFlatBtn = Views.findById(this, R.id.save_flat_btn);
+
         flatNameTextInputLayout = Views.findById(this, R.id.flat_name);
         flatNameEditText = flatNameTextInputLayout.getEditText();
         errFlatNameText = Views.findById(this, R.id.err_flat_name);
 
-        addressTextInputLayout = Views.findById(this, R.id.flat_address);
+        addressTextInputLayout = Views.findById(this, R.id.street_address);
         addressEditText = addressTextInputLayout.getEditText();
-        errAddressText = Views.findById(this, R.id.err_flat_address);
+        errAddressText = Views.findById(this, R.id.err_street_address);
 
+        cityTextInputLayout = Views.findById(this, R.id.city);
+        cityEditText = addressTextInputLayout.getEditText();
+        errCityText = Views.findById(this, R.id.err_city);
+
+        pinCodeTextInputLayout = Views.findById(this, R.id.pincode);
+        pinCodeEditText = addressTextInputLayout.getEditText();
+
+        countrySpinner = Views.findById(this, R.id.country_spinner);
+        errCountryText = Views.findById(this, R.id.err_country);
     }
 
     @Override
@@ -143,7 +164,31 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         } else {
             errAddressText.setVisibility(GONE);
         }
+
+        String city = cityEditText.getText().toString();
+        if (TextUtils.isEmpty(city)) {
+            errCityText.setVisibility(VISIBLE);
+            validate = false;
+        } else {
+            errCityText.setVisibility(GONE);
+        }
+
+        String selectedPg = (String) countrySpinner.getSelectedItem();
+        if (selectedPg.equals(countrySpinner.getHint())) {
+            errCountryText.setVisibility(VISIBLE);
+            validate = false;
+        } else {
+            errCountryText.setVisibility(GONE);
+        }
+
         return validate;
+    }
+
+    public void setAdapter(){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
+                R.array.pg_array, android.R.layout.simple_spinner_item);;
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        countrySpinner.setAdapter(adapter);
     }
 
     private Flat formToFlat(){

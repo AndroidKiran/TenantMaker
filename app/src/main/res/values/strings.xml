@@ -87,6 +87,15 @@
 
     <string name="fab_behavior">com.easy.make.tenantmaker.base.component.FabBehavior</string>
     <string name="title_activity_maps">Map</string>
+    <string name="str_street_address">Street Address</string>
+    <string name="str_city">City</string>
+    <string name="str_pin_code">Pincode</string>
+    <string name="err_flat_name">Please enter valid name</string>
+    <string name="err_street_address">Please enter valid street address</string>
+    <string name="err_city">Please enter valid city</string>
+    <string name="err_country">Please select the country</string>
+    <string name="str_name">Name</string>
+    <string name="err_name">Please enter the valid name</string>
 
 
 </resources>

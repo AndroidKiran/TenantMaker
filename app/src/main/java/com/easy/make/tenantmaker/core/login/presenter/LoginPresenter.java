@@ -68,7 +68,9 @@ public class LoginPresenter {
                 .subscribe(new Action1<Flats>() {
                     @Override
                     public void call(Flats flats) {
-                        preferenceService.setFirstFlowPreference(true);
+                        if (flats.size() != 0){
+                            preferenceService.setFirstFlowPreference(true);
+                        }
                         loginDisplayer.dismissProgress();
                         navigator.toMain();
                     }
