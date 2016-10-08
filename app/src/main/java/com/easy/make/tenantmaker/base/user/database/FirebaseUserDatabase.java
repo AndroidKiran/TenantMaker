@@ -1,4 +1,4 @@
-package com.easy.make.tenantmaker.base.database;
+package com.easy.make.tenantmaker.base.user.database;
 
 import com.easy.make.tenantmaker.base.rx.FirebaseObservableListeners;
 import com.easy.make.tenantmaker.core.user.data.model.User;

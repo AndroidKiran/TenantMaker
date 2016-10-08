@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.easy.make.tenantmaker.R;
 import com.easy.make.tenantmaker.base.BaseActivity;
 import com.easy.make.tenantmaker.base.Dependencies;
+import com.easy.make.tenantmaker.base.OnFragmentInteractionListener;
 import com.easy.make.tenantmaker.base.flat.view.NewFlatView;
 import com.easy.make.tenantmaker.base.navigation.AndroidNavigator;
 import com.easy.make.tenantmaker.core.flat.displayer.NewFlatDisplayer;
@@ -16,7 +17,7 @@ import com.easy.make.tenantmaker.location.ReactiveLocationProviderImpl;
 /**
  * Created by ravi on 04/09/16.
  */
-public class NewFlatActivity extends BaseActivity {
+public class NewFlatActivity extends BaseActivity implements OnFragmentInteractionListener{
 
     private NewFlatView newFlatView;
     private NewFlatPresenter newFlatPresenter;
@@ -55,5 +56,10 @@ public class NewFlatActivity extends BaseActivity {
     protected void onStop() {
         newFlatPresenter.stopPresenting();
         super.onStop();
+    }
+
+    @Override
+    public void onFragmentInteraction(Bundle bundle) {
+        newFlatPresenter.onFragmentInteraction(bundle);
     }
 }

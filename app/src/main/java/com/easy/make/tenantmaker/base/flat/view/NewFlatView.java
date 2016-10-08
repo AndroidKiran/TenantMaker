@@ -2,6 +2,7 @@ package com.easy.make.tenantmaker.base.flat.view;
 
 import android.content.Context;
 import android.location.Address;
+import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,13 +14,15 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import com.easy.make.tenantmaker.R;
 import com.easy.make.tenantmaker.base.component.materialcomponent.MaterialProgressDialog;
+import com.easy.make.tenantmaker.base.country.CountriesDialog;
 import com.easy.make.tenantmaker.base.utils.DialogUtils;
+import com.easy.make.tenantmaker.base.utils.UtilBundles;
 import com.easy.make.tenantmaker.core.Utils.PreferenceService;
+import com.easy.make.tenantmaker.core.country.model.Country;
 import com.easy.make.tenantmaker.core.flat.displayer.NewFlatDisplayer;
 import com.easy.make.tenantmaker.core.flat.model.Flat;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,8 +32,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.novoda.notils.caster.Views;
-
-import fr.ganfra.materialspinner.MaterialSpinner;
 
 /**
  * Created by ravi on 05/09/16.
@@ -57,7 +58,9 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     private TextInputLayout pinCodeTextInputLayout;
     private EditText pinCodeEditText;
     private AppCompatTextView errCountryText;
-    private MaterialSpinner countrySpinner;
+    private TextInputLayout countryTextInputLayout;
+    private EditText countryEditText;
+    private CountriesDialog countriesDialog;
 
     public NewFlatView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -71,7 +74,6 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         View.inflate(getContext(), R.layout.merge_new_flat_view, this);
         setToolbar();
         initControls();
-        setAdapter();
     }
 
     public void setMap() {
@@ -83,6 +85,8 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     void setToolbar() {
         toolbar = Views.findById(this, R.id.toolbar);
         toolbar.setTitle(R.string.str_flat);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+
     }
 
     void initControls() {
@@ -97,13 +101,14 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         errAddressText = Views.findById(this, R.id.err_street_address);
 
         cityTextInputLayout = Views.findById(this, R.id.city);
-        cityEditText = addressTextInputLayout.getEditText();
+        cityEditText = cityTextInputLayout.getEditText();
         errCityText = Views.findById(this, R.id.err_city);
 
         pinCodeTextInputLayout = Views.findById(this, R.id.pincode);
-        pinCodeEditText = addressTextInputLayout.getEditText();
+        pinCodeEditText = pinCodeTextInputLayout.getEditText();
 
-        countrySpinner = Views.findById(this, R.id.country_spinner);
+        countryTextInputLayout = Views.findById(this, R.id.country);
+        countryEditText = Views.findById(this, R.id.country_et);
         errCountryText = Views.findById(this, R.id.err_country);
     }
 
@@ -112,8 +117,13 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         toolbar.setNavigationOnClickListener(onNavigationBackClickListener);
         flatNameEditText.addTextChangedListener(textWatcher);
         addressEditText.addTextChangedListener(textWatcher);
+        cityEditText.addTextChangedListener(textWatcher);
+        pinCodeEditText.addTextChangedListener(textWatcher);
+        countryEditText.addTextChangedListener(textWatcher);
+        countryEditText.setOnClickListener(onClickListener);
+        countryEditText.setOnFocusChangeListener(onFocusChangeListener);
+        countryEditText.setKeyListener(null);
         createFlatBtn.setOnClickListener(onClickListener);
-//        mapFragment.getMapAsync(onMapReadyCallback);
         this.flatCreationListener = flatCreationListener;
     }
 
@@ -123,19 +133,23 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         createFlatBtn.setOnClickListener(null);
         flatNameEditText.addTextChangedListener(null);
         addressEditText.addTextChangedListener(null);
-//        mapFragment.getMapAsync(null);
+        cityEditText.addTextChangedListener(null);
+        pinCodeEditText.addTextChangedListener(null);
+        countryEditText.addTextChangedListener(null);
+        countryEditText.setOnClickListener(null);
+        countryEditText.setOnFocusChangeListener(null);
         this.flatCreationListener = null;
     }
 
     @Override
     public void showProgress() {
-        materialProgressDialog =  new MaterialProgressDialog(getAppCompatActivity());
+        materialProgressDialog = new MaterialProgressDialog(getAppCompatActivity());
         DialogUtils.showMaterialProgressDialog(materialProgressDialog, getAppCompatActivity().getString(R.string.str_progress_flat_title), getAppCompatActivity().getString(R.string.str_progress_wait), getAppCompatActivity());
     }
 
     @Override
     public void dismissProgress() {
-        if (materialProgressDialog != null){
+        if (materialProgressDialog != null) {
             materialProgressDialog.dismiss();
         }
     }
@@ -143,6 +157,11 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     @Override
     public void clear() {
 
+    }
+
+    @Override
+    public void onFragmentInteraction(Bundle bundle) {
+        display((Country) bundle.getParcelable(UtilBundles.EXTRA_BUNDLE));
     }
 
     private boolean validateForm() {
@@ -173,28 +192,24 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
             errCityText.setVisibility(GONE);
         }
 
-        String selectedPg = (String) countrySpinner.getSelectedItem();
-        if (selectedPg.equals(countrySpinner.getHint())) {
+
+        String country = countryEditText.getText().toString();
+        if (TextUtils.isEmpty(country)) {
             errCountryText.setVisibility(VISIBLE);
             validate = false;
         } else {
             errCountryText.setVisibility(GONE);
         }
 
+
         return validate;
     }
 
-    public void setAdapter(){
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
-                R.array.pg_array, android.R.layout.simple_spinner_item);;
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        countrySpinner.setAdapter(adapter);
-    }
 
-    private Flat formToFlat(){
+    private Flat formToFlat() {
         Flat flat = new Flat();
         flat.setName(flatNameEditText.getText().toString());
-        flat.setAddress(addressEditText.getText().toString());
+        flat.setAddress(toAddress());
         return flat;
     }
 
@@ -211,16 +226,39 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
 
         @Override
         public void afterTextChanged(Editable s) {
-           if (flatNameEditText.isFocused()){
+            if (flatNameEditText.isFocused()) {
                 errFlatNameText.setVisibility(s.length() == 0 ? VISIBLE : GONE);
-            }  else if (addressEditText.isFocused()){
+            } else if (addressEditText.isFocused()) {
                 errAddressText.setVisibility(s.length() == 10 ? VISIBLE : GONE);
-               if (s.length() > 10){
-                   flatCreationListener.onAddressTextChanged(s.toString());
-               }
+            } else if (cityEditText.isFocused()) {
+                errCityText.setVisibility(s.length() < 2 ? VISIBLE : GONE);
+            } else if (countryEditText.isFocused()){
+                errCountryText.setVisibility(s.length() == 0 ? VISIBLE : GONE);
             }
+            String address = toAddress();
+           flatCreationListener.onAddressTextChanged(toAddress());
+
         }
     };
+
+
+    private String toAddress(){
+        StringBuilder addressStringBuilder = new StringBuilder();
+
+        String address = addressEditText.getText().toString();
+        addressStringBuilder.append(!TextUtils.isEmpty(address) ? address : "");
+
+        String city = cityEditText.getText().toString();
+        addressStringBuilder.append(!TextUtils.isEmpty(city) ? ","+city : "");
+
+        String country = countryEditText.getText().toString();
+        addressStringBuilder.append(!TextUtils.isEmpty(country) ? ","+country : "");
+
+        String pinCode = pinCodeEditText.getText().toString();
+        addressStringBuilder.append(!TextUtils.isEmpty(pinCode) ? "Pincode - "+pinCode : "");
+
+        return addressStringBuilder.toString();
+    }
 
 
     final OnClickListener onClickListener = new OnClickListener() {
@@ -232,6 +270,10 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
                     if (validateForm()) {
                         flatCreationListener.onCreateFlatClicked(formToFlat());
                     }
+                    break;
+
+                case R.id.country_et:
+                    showDialog();
                     break;
             }
         }
@@ -260,8 +302,8 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     };
 
     @Override
-    public void setMarker(Address address){
-        if (mGoogleMap != null){
+    public void setMarker(Address address) {
+        if (mGoogleMap != null) {
             mGoogleMap.clear();
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
             mGoogleMap.addMarker(new MarkerOptions().position(latLng));
@@ -272,9 +314,39 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
 
     @Override
     public void toggleViewVisibility(PreferenceService preferenceService) {
-        if (preferenceService.getFirstFlowValue()){
+        if (preferenceService.getFirstFlowValue()) {
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         }
     }
 
+    @Override
+    public void showDialog() {
+        countriesDialog = CountriesDialog.newInstance(getAppCompatActivity().getSupportFragmentManager());
+    }
+
+    @Override
+    public void dismissDialog() {
+        if (countriesDialog != null){
+            countriesDialog.dismiss();
+        }
+    }
+
+    public void display(Country country) {
+        dismissDialog();
+        countryEditText.setText(country.getCountryName(getAppCompatActivity()));
+    }
+
+    OnFocusChangeListener onFocusChangeListener = new OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View view, boolean isFocused) {
+            switch (view.getId()){
+                case R.id.country_et:
+                    if (isFocused){
+                        showDialog();
+                    }
+                    break;
+            }
+
+        }
+    };
 }

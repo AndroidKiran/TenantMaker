@@ -13,7 +13,6 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="@dimen/dimen_50"
             app:expandedTitleMarginStart="@dimen/dimen_50"

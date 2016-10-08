@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.easy.make.tenantmaker.base.component.text.ClearAbleEditText
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/str_search"
+        android:inputType="textPersonName"
+        android:layout_margin="@dimen/dimen_16"
+        android:maxLines="1"
+        android:textSize="@dimen/font_16"
+        app:fontTypeface="museosans500" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clipToPadding="false" />
+
+</merge>

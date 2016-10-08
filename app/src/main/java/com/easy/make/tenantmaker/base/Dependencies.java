@@ -4,11 +4,12 @@ import android.content.Context;
 
 import com.easy.make.tenantmaker.base.analytics.FirebaseAnalyticsAnalytics;
 import com.easy.make.tenantmaker.base.analytics.FirebaseErrorLogger;
-import com.easy.make.tenantmaker.base.database.FirebaseUserDatabase;
+import com.easy.make.tenantmaker.base.country.database.FirebaseCountryDatabase;
 import com.easy.make.tenantmaker.base.flat.database.FirebaseFlatDatabase;
 import com.easy.make.tenantmaker.base.login.database.FirebaseAuthDatabase;
 import com.easy.make.tenantmaker.base.rx.FirebaseObservableListeners;
 import com.easy.make.tenantmaker.base.tenants.database.FirebaseTenantDatabase;
+import com.easy.make.tenantmaker.base.user.database.FirebaseUserDatabase;
 import com.easy.make.tenantmaker.base.utils.AppPreferences;
 import com.easy.make.tenantmaker.base.utils.GsonServiceImpl;
 import com.easy.make.tenantmaker.core.Config;
@@ -16,6 +17,8 @@ import com.easy.make.tenantmaker.core.Utils.GsonService;
 import com.easy.make.tenantmaker.core.Utils.PreferenceService;
 import com.easy.make.tenantmaker.core.analytics.Analytics;
 import com.easy.make.tenantmaker.core.analytics.ErrorLogger;
+import com.easy.make.tenantmaker.core.country.service.CountryService;
+import com.easy.make.tenantmaker.core.country.service.PersistedCountryService;
 import com.easy.make.tenantmaker.core.flat.service.FlatService;
 import com.easy.make.tenantmaker.core.flat.service.PersistedFlatService;
 import com.easy.make.tenantmaker.core.login.service.FirebaseLoginService;
@@ -43,13 +46,15 @@ public enum Dependencies {
     private PersistedFlatService flatService;
     private AppPreferences pref;
     private GsonServiceImpl gsonService;
+    private CountryService countryService;
+    private FirebaseDatabase firebaseDatabase;
 
     public void init(Context context) {
         if (needsInitialisation()) {
             Context appContext = context.getApplicationContext();
             FirebaseApp firebaseApp = FirebaseApp.initializeApp(appContext, FirebaseOptions.fromResource(appContext), "TenantMaker");
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance(firebaseApp);
-            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance(firebaseApp);
+            firebaseDatabase = FirebaseDatabase.getInstance(firebaseApp);
             firebaseDatabase.setPersistenceEnabled(true);
             FirebaseObservableListeners firebaseObservableListeners = new FirebaseObservableListeners();
             FirebaseUserDatabase userDatabase = new FirebaseUserDatabase(firebaseDatabase, firebaseObservableListeners);
@@ -60,6 +65,8 @@ public enum Dependencies {
             tenantService = new PersistedTenantService(new FirebaseTenantDatabase(firebaseDatabase, firebaseObservableListeners));
             userService = new PersistedUserService(userDatabase);
             flatService = new PersistedFlatService(new FirebaseFlatDatabase(firebaseDatabase, firebaseObservableListeners));
+            countryService = new PersistedCountryService(new FirebaseCountryDatabase(firebaseDatabase, firebaseObservableListeners));
+
             config = FirebaseConfig.newInstance().init(errorLogger);
             pref = new AppPreferences(appContext);
             gsonService = new GsonServiceImpl();
@@ -92,6 +99,10 @@ public enum Dependencies {
         return flatService;
     }
 
+    public CountryService getCountryService(){
+        return countryService;
+    }
+
     public ErrorLogger getErrorLogger() {
         return errorLogger;
     }
@@ -106,5 +117,9 @@ public enum Dependencies {
 
     public GsonService getGsonService(){
         return gsonService;
+    }
+
+    public FirebaseDatabase getFirebaseDatabase() {
+        return firebaseDatabase;
     }
 }

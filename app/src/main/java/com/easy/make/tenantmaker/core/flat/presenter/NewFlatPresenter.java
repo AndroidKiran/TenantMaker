@@ -1,6 +1,8 @@
 package com.easy.make.tenantmaker.core.flat.presenter;
 
 import android.location.Address;
+import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.easy.make.tenantmaker.core.Utils.PreferenceService;
 import com.easy.make.tenantmaker.core.analytics.Analytics;
@@ -106,7 +108,9 @@ public class NewFlatPresenter {
 
         @Override
         public void onAddressTextChanged(String address) {
-            subscribeGeocoder(address);
+            if (!TextUtils.isEmpty(address)){
+                subscribeGeocoder(address);
+            }
         }
     };
 
@@ -133,6 +137,10 @@ public class NewFlatPresenter {
                 return addresses != null && !addresses.isEmpty() ? addresses.get(0) : null;
             }
         };
+    }
+
+    public void onFragmentInteraction(Bundle bundle){
+        newFlatDisplayer.onFragmentInteraction(bundle);
     }
 
 

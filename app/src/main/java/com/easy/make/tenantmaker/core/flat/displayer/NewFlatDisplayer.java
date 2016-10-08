@@ -2,6 +2,7 @@ package com.easy.make.tenantmaker.core.flat.displayer;
 
 
 import android.location.Address;
+import android.os.Bundle;
 
 import com.easy.make.tenantmaker.core.Utils.PreferenceService;
 import com.easy.make.tenantmaker.core.flat.model.Flat;
@@ -24,6 +25,12 @@ public interface NewFlatDisplayer {
     void toggleViewVisibility(PreferenceService preferenceService);
 
     void clear();
+
+    void onFragmentInteraction(Bundle bundle);
+
+    public void showDialog();
+
+    public void dismissDialog();
 
     interface FlatCreationListener {
 
