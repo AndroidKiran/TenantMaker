@@ -111,14 +111,4 @@ public class TenantPresenter {
             }
         };
     }
-
-
-
-
-
-
-
-
-
-
 }

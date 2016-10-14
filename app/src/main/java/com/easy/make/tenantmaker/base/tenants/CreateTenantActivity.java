@@ -29,6 +29,7 @@ public class CreateTenantActivity extends BaseActivity {
         newTenantPresenter = new NewTenantPresenter((NewTenantDisplayer) newTenantView,
                 Dependencies.INSTANCE.getTenantService(),
                 Dependencies.INSTANCE.getLoginService(),
+                Dependencies.INSTANCE.getFlatService(),
                 new AndroidNavigator(this),
                 Dependencies.INSTANCE.getErrorLogger());
 

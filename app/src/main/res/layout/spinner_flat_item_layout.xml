@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.easy.make.tenantmaker.base.flat.view.FlatSpinnerItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_white"
+    android:padding="@dimen/dimen_16"
+    android:layout="@layout/merge_spinner_flat_item" />

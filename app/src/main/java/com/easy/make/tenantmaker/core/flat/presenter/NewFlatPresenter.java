@@ -16,12 +16,15 @@ import com.easy.make.tenantmaker.core.login.data.model.Authentication;
 import com.easy.make.tenantmaker.core.login.service.LoginService;
 import com.easy.make.tenantmaker.core.navigation.Navigator;
 import com.easy.make.tenantmaker.core.user.data.model.User;
+import com.easy.make.tenantmaker.network.ReactiveNetwork;
 
 import java.util.List;
 
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -52,7 +55,7 @@ public class NewFlatPresenter {
                             ErrorLogger errorLogger,
                             Analytics analytics,
                             PreferenceService preferenceService,
-                            ReactiveLocationProvider locationProvider){
+                            ReactiveLocationProvider locationProvider) {
 
         this.newFlatDisplayer = newFlatDisplayer;
         this.flatService = flatService;
@@ -64,7 +67,7 @@ public class NewFlatPresenter {
         this.locationProvider = locationProvider;
     }
 
-    public void startPresenting(){
+    public void startPresenting() {
         newFlatDisplayer.attach(flatCreationListener);
         newFlatDisplayer.toggleViewVisibility(preferenceService);
         subscriptions.add(loginService.getAuthentication().subscribe(new Action1<Authentication>() {
@@ -75,11 +78,11 @@ public class NewFlatPresenter {
         }));
     }
 
-    public void stopPresenting(){
+    public void stopPresenting() {
         newFlatDisplayer.detach(flatCreationListener);
         subscriptions.clear();
         subscriptions = new CompositeSubscription();
-        if (geoCodeSubscription != null){
+        if (geoCodeSubscription != null) {
             geoCodeSubscription.unsubscribe();
         }
     }
@@ -92,7 +95,7 @@ public class NewFlatPresenter {
                 @Override
                 public void call(DatabaseResult<Flat> flatDatabaseResult) {
                     newFlatDisplayer.dismissProgress();
-                    if (!preferenceService.getFirstFlowValue()){
+                    if (!preferenceService.getFirstFlowValue()) {
                         preferenceService.setFirstFlowPreference(true);
                         navigator.toMain();
                     } else {
@@ -108,29 +111,48 @@ public class NewFlatPresenter {
 
         @Override
         public void onAddressTextChanged(String address) {
-            if (!TextUtils.isEmpty(address)){
+            if (!TextUtils.isEmpty(address)) {
                 subscribeGeocoder(address);
             }
         }
     };
 
-    private void subscribeGeocoder(String address){
-        geoCodeSubscription = locationProvider.getGeocodeObservable(address, 2)
-                .map(getAddress())
-                .subscribe(new Action1<Address>() {
+    private void subscribeGeocoder(final String address) {
+        geoCodeSubscription = ReactiveNetwork.observeInternetConnectivity()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Boolean>() {
                     @Override
-                    public void call(Address address) {
-                        if (address != null){
-                            newFlatDisplayer.setMarker(address);
-                            setLatitude(address.getLatitude());
-                            setLongitude(address.getLongitude());
+                    public void call(Boolean isConnectedToInternet) {
+                        if (isConnectedToInternet) {
+                            locationProvider.getGeocodeObservable(address, 2)
+                                    .map(getAddress())
+                                    .doOnError(new Action1<Throwable>() {
+                                        @Override
+                                        public void call(Throwable throwable) {
+
+                                        }
+                                    })
+                                    .subscribe(new Action1<Address>() {
+                                        @Override
+                                        public void call(Address address) {
+                                            if (address != null) {
+                                                newFlatDisplayer.setMarker(address);
+                                                setLatitude(address.getLatitude());
+                                                setLongitude(address.getLongitude());
+                                            }
+                                        }
+
+
+                                    });
                         }
                     }
                 });
+
     }
 
 
-    private Func1<List<Address>, Address> getAddress(){
+    private Func1<List<Address>, Address> getAddress() {
         return new Func1<List<Address>, Address>() {
             @Override
             public Address call(List<Address> addresses) {
@@ -139,7 +161,7 @@ public class NewFlatPresenter {
         };
     }
 
-    public void onFragmentInteraction(Bundle bundle){
+    public void onFragmentInteraction(Bundle bundle) {
         newFlatDisplayer.onFragmentInteraction(bundle);
     }
 
@@ -160,7 +182,7 @@ public class NewFlatPresenter {
         this.longitude = longitude;
     }
 
-    public Flat updateFlat(Flat flat){
+    public Flat updateFlat(Flat flat) {
         flat.setOwnId(user.getId());
         flat.setLongitude(getLongitude());
         flat.setLatitude(getLatitude());

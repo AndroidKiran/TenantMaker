@@ -42,7 +42,7 @@ public class FirebaseTenantDatabase implements TenantDatabase {
 
     @Override
     public Observable<Tenant> writeTenant(Tenant newTenant, User user) {
-        return firebaseObservableListeners.setValue(newTenant, tenantDB.child(user.getId()).push(), newTenant);
+        return firebaseObservableListeners.setValue(newTenant, tenantDB.child(user.getId()).child(newTenant.getId()), newTenant);
     }
 
     private static Func1<DataSnapshot, Tenants> getTenants() {

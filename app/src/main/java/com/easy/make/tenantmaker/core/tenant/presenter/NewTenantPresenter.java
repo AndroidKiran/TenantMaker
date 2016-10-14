@@ -2,6 +2,8 @@ package com.easy.make.tenantmaker.core.tenant.presenter;
 
 import com.easy.make.tenantmaker.core.analytics.ErrorLogger;
 import com.easy.make.tenantmaker.core.database.DatabaseResult;
+import com.easy.make.tenantmaker.core.flat.model.Flats;
+import com.easy.make.tenantmaker.core.flat.service.FlatService;
 import com.easy.make.tenantmaker.core.login.data.model.Authentication;
 import com.easy.make.tenantmaker.core.login.service.LoginService;
 import com.easy.make.tenantmaker.core.navigation.Navigator;
@@ -24,6 +26,7 @@ public class NewTenantPresenter {
     private final LoginService loginService;
     private final Navigator navigator;
     private final ErrorLogger errorLogger;
+    private final FlatService flatService;
     private CompositeSubscription subscriptions = new CompositeSubscription();
     private User user;
 
@@ -31,11 +34,13 @@ public class NewTenantPresenter {
     public NewTenantPresenter(NewTenantDisplayer newTenantDisplayer,
                               TenantService tenantService,
                               LoginService loginService,
+                              FlatService flatService,
                               Navigator navigator,
                               ErrorLogger errorLogger) {
         this.newTenantDisplayer = newTenantDisplayer;
         this.tenantService = tenantService;
         this.loginService = loginService;
+        this.flatService = flatService;
         this.navigator = navigator;
         this.errorLogger = errorLogger;
     }
@@ -49,6 +54,15 @@ public class NewTenantPresenter {
                 user = authentication.getUser();
             }
         }));
+        subscriptions.add(flatService.getFlats(user)
+                .subscribe(new Action1<Flats>() {
+                    @Override
+                    public void call(Flats flats) {
+                        if (flats.size() != 0){
+                            newTenantDisplayer.displayFlats(flats);
+                        }
+                    }
+                }));
     }
 
     public void stopPresenting() {

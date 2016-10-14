@@ -51,8 +51,8 @@ public class TenantView extends RelativeLayout {
     }
 
     public void display(Tenant tenant){
-        tenantName.setText(tenant.getFirstName()+" "+tenant.getLastName());
-        tenantAddress.setText(tenant.getAddress());
-        tenantRoomNo.setText(getContext().getString(R.string.str_room_num)+"-"+tenant.getPgOrFlatNum());
+        tenantName.setText(tenant.getBasicInfo().getFirstName()+" "+tenant.getBasicInfo().getLastName());
+        tenantAddress.setText(tenant.getBasicInfo().getAddress());
+        tenantRoomNo.setText(getContext().getString(R.string.str_room_num)+"-"+tenant.getPgFlatInfo().getPgOrFlatNum());
     }
 }

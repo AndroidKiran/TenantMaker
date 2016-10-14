@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/flat_avatar"
+        android:layout_width="@dimen/dimen_36"
+        android:layout_height="@dimen/dimen_36"
+        android:layout_marginRight="@dimen/dimen_16"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_check_box_black_24dp" />
+
+    <LinearLayout
+        android:id="@+id/flat_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/flat_avatar"
+        android:orientation="vertical">
+
+        <com.easy.make.tenantmaker.base.component.text.TextView
+            android:id="@+id/flat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/dimen_5"
+            android:paddingTop="@dimen/dimen_5"
+            android:textColor="@color/grey_charcoal"
+            android:textSize="@dimen/font_16"
+            app:fontTypeface="museosans500"
+            tools:text="Arnold Randy" />
+
+        <com.easy.make.tenantmaker.base.component.text.TextView
+            android:id="@+id/flat_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/dimen_5"
+            android:textColor="@color/grey_cool"
+            android:textSize="@dimen/font_14"
+            app:fontTypeface="museosans500"
+            tools:text="Shri Sai Paying Guest" />
+
+    </LinearLayout>
+
+
+</merge>

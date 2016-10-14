@@ -14,13 +14,15 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import com.easy.make.tenantmaker.R;
 import com.easy.make.tenantmaker.base.component.materialcomponent.MaterialProgressDialog;
+import com.easy.make.tenantmaker.base.flat.view.FlatSpinnerAdapter;
 import com.easy.make.tenantmaker.base.utils.DateTimeUtils;
 import com.easy.make.tenantmaker.base.utils.DialogUtils;
+import com.easy.make.tenantmaker.core.flat.model.Flat;
+import com.easy.make.tenantmaker.core.flat.model.Flats;
 import com.easy.make.tenantmaker.core.tenant.data.model.Tenant;
 import com.easy.make.tenantmaker.core.tenant.displayer.NewTenantDisplayer;
 import com.novoda.notils.caster.Views;
@@ -39,6 +41,7 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
 
 
     private final Context context;
+    private FlatSpinnerAdapter flatSpinnerAdapter;
     private Toolbar toolbar;
     private TenantCreationListener tenantCreationListener;
     private AppCompatButton createTenantBtn;
@@ -71,6 +74,7 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
     public NewTenantView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        flatSpinnerAdapter = new FlatSpinnerAdapter(getContext(), R.layout.spinner_flat_item_layout);
         setFitsSystemWindows(true);
     }
 
@@ -126,10 +130,7 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
     }
 
     public void setAdapter(){
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
-                R.array.pg_array, android.R.layout.simple_spinner_item);;
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        pgSpinner.setAdapter(adapter);
+        pgSpinner.setAdapter(flatSpinnerAdapter);
     }
 
     @Override
@@ -163,6 +164,11 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
         pgSpinner.setOnItemSelectedListener(null);
         rentDateTextView.setOnClickListener(null);
         this.tenantCreationListener = null;
+    }
+
+    @Override
+    public void displayFlats(Flats flats) {
+        flatSpinnerAdapter.setData(flats);
     }
 
     @Override
@@ -242,8 +248,8 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
             errRoomText.setVisibility(GONE);
         }
 
-        String selectedPg = (String) pgSpinner.getSelectedItem();
-        if (selectedPg.equals(pgSpinner.getHint())) {
+        int selectedPosition =  pgSpinner.getSelectedItemPosition();
+        if (selectedPosition == 0) {
             errPgText.setVisibility(VISIBLE);
             validate = false;
         } else {
@@ -254,15 +260,27 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
     }
 
     private Tenant formToTenant(){
+
+        Tenant.BasicInfo basicInfo = new Tenant.BasicInfo();
+        basicInfo.setFirstName(firtNameEditText.getText().toString());
+        basicInfo.setLastName(lastNameEditText.getText().toString());
+        basicInfo.setEmail(emailEditText.getText().toString());
+        basicInfo.setMobile(mobileEditText.getText().toString());
+        basicInfo.setAddress(addressEditText.getText().toString());
+
+        Tenant.PaymentInfo paymentInfo = new Tenant.PaymentInfo();
+        paymentInfo.setRentDate(rentDateTextView.getText().toString());
+
+        Tenant.PgFlatInfo pgFlatInfo = new Tenant.PgFlatInfo();
+        pgFlatInfo.setPgOrFlatId(((Flat) pgSpinner.getSelectedItem()).getId());
+        pgFlatInfo.setPgOrFlatNum(roomNumEditText.getText().toString());
+
         Tenant tenant = new Tenant();
-        tenant.setEmail(emailEditText.getText().toString());
-        tenant.setFirstName(firtNameEditText.getText().toString());
-        tenant.setLastName(lastNameEditText.getText().toString());
-        tenant.setMobile(mobileEditText.getText().toString());
-        tenant.setAddress(addressEditText.getText().toString());
-        tenant.setRentDate(rentDateTextView.getText().toString());
-        tenant.setPgOrFlatId(pgSpinner.getSelectedItem().toString());
-        tenant.setPgOrFlatNum(roomNumEditText.getText().toString());
+        tenant.setId(mobileEditText.getText().toString());
+        tenant.setBasicInfo(basicInfo);
+        tenant.setPaymentInfo(paymentInfo);
+        tenant.setPgFlatInfo(pgFlatInfo);
+
         return tenant;
     }
 
@@ -328,6 +346,7 @@ public class NewTenantView extends CoordinatorLayout implements NewTenantDisplay
     final AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
         }
 
         @Override

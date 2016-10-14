@@ -42,7 +42,7 @@ public class AndroidNavigator implements Navigator {
 
     @Override
     public void toChatWithTenant(Tenant tenant) {
-        System.out.println("Item clicked=======  "+tenant.getEmail());
+        System.out.println("Item clicked=======  ");
 
     }
 

@@ -1,6 +1,7 @@
 package com.easy.make.tenantmaker.core.tenant.displayer;
 
 
+import com.easy.make.tenantmaker.core.flat.model.Flats;
 import com.easy.make.tenantmaker.core.tenant.data.model.Tenant;
 
 /**
@@ -11,6 +12,8 @@ public interface NewTenantDisplayer {
     void attach(TenantCreationListener tenantCreationListener);
 
     void detach(TenantCreationListener tenantCreationListener);
+
+    void displayFlats(Flats flats);
 
     void showProgress();
 

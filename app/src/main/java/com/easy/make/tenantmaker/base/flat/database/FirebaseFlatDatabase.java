@@ -20,7 +20,7 @@ import rx.functions.Func1;
  */
 public class FirebaseFlatDatabase implements FlatDatabase {
 
-    private static final int DEFAULT_LIMIT = 1;
+    private static final int DEFAULT_LIMIT = 1000;
     private final FirebaseObservableListeners firebaseObservableListeners;
     private final DatabaseReference flatDb;
 
