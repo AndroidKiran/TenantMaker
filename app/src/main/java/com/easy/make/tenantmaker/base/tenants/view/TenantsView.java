@@ -40,7 +40,7 @@ public class TenantsView extends LinearLayout implements TenantsDisplayer {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        View.inflate(getContext(), R.layout.merge_tenant_view, this);
+        View.inflate(getContext(), R.layout.merge_tenants_view, this);
         setToolbar();
         setRecyclerView();
         setFabButton();
@@ -51,7 +51,7 @@ public class TenantsView extends LinearLayout implements TenantsDisplayer {
     }
 
     private void setRecyclerView() {
-        recyclerView = Views.findById(this, R.id.tenants_recycler_view);
+        recyclerView = Views.findById(this, R.id.recycler_view);
         Drawable dividerDrawable = ContextCompat.getDrawable(getContext(), R.drawable.seperator_72);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(dividerDrawable);
         recyclerView.addItemDecoration(dividerItemDecoration);

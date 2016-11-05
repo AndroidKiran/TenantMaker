@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.easy.make.tenantmaker.R;
+import com.easy.make.tenantmaker.core.flat.displayer.FlatsDisplayer;
 import com.easy.make.tenantmaker.core.flat.model.Flat;
 import com.easy.make.tenantmaker.core.flat.model.Flats;
 
@@ -19,6 +20,7 @@ public class FlatAdapter extends RecyclerView.Adapter<FlatViewHolder> {
     private final LayoutInflater inflater;
     private Flats flats;
     private FlatItemView flatItemView;
+    private FlatsDisplayer.FlatInteractionListener flatInteractionListener;
 
     public FlatAdapter(LayoutInflater inflater) {
         this.inflater = inflater;
@@ -47,18 +49,18 @@ public class FlatAdapter extends RecyclerView.Adapter<FlatViewHolder> {
         return flats.size();
     }
 
-//    public void attach(TenantsDisplayer.TenantInteractionListener tenantInteractionListener) {
-//        this.tenantInteractionListener = tenantInteractionListener;
-//    }
-//
-//    public void detach(TenantsDisplayer.TenantInteractionListener tenantInteractionListener) {
-//        this.tenantInteractionListener = null;
-//    }
+    public void attach(FlatsDisplayer.FlatInteractionListener flatInteractionListener) {
+        this.flatInteractionListener = flatInteractionListener;
+    }
+
+    public void detach(FlatsDisplayer.FlatInteractionListener flatInteractionListener) {
+        this.flatInteractionListener = null;
+    }
 
     FlatViewHolder.FlatSelectionListener selectionListener = new FlatViewHolder.FlatSelectionListener() {
         @Override
         public void onFlatSelected(Flat flat) {
-
+            flatInteractionListener.onFlatSelected(flat);
         }
     };
 }
