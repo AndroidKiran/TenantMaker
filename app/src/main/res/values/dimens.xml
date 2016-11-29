@@ -18,6 +18,7 @@
     <dimen name="dimen_48">48dp</dimen>
     <dimen name="dimen_50">50dp</dimen>
     <dimen name="dimen_72">72dp</dimen>
+    <dimen name="dimen_100">100dp</dimen>
     <dimen name="dimen_150">150dp</dimen>
     <dimen name="dimen_200">200dp</dimen>
     <dimen name="dimen_256">256dp</dimen>

@@ -3,6 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/layout_flat_add" />
+    <include layout="@layout/static_recycler_view" />
 
 </merge>

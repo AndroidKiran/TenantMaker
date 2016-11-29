@@ -1,9 +1,7 @@
 package com.easy.make.tenantmaker.base.flat.view;
 
 import android.content.Context;
-import android.location.Address;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -15,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.easy.make.tenantmaker.R;
 import com.easy.make.tenantmaker.base.component.materialcomponent.MaterialProgressDialog;
@@ -25,18 +24,14 @@ import com.easy.make.tenantmaker.core.Utils.PreferenceService;
 import com.easy.make.tenantmaker.core.country.model.Country;
 import com.easy.make.tenantmaker.core.flat.displayer.NewFlatDisplayer;
 import com.easy.make.tenantmaker.core.flat.model.Flat;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.novoda.notils.caster.Views;
 
 /**
  * Created by ravi on 05/09/16.
  */
-public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
+public class NewFlatView extends LinearLayout implements NewFlatDisplayer {
 
     private final Context context;
     private Toolbar toolbar;
@@ -62,9 +57,11 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     private EditText countryEditText;
     private CountriesDialog countriesDialog;
 
+
     public NewFlatView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        setOrientation(VERTICAL);
         setFitsSystemWindows(true);
     }
 
@@ -72,22 +69,22 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
     protected void onFinishInflate() {
         super.onFinishInflate();
         View.inflate(getContext(), R.layout.merge_new_flat_view, this);
-        setToolbar();
+//        setToolbar();
         initControls();
     }
 
-    public void setMap() {
-        mapFragment = (SupportMapFragment) getAppCompatActivity().getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(onMapReadyCallback);
-    }
+//    public void setMap() {
+//        mapFragment = (SupportMapFragment) getAppCompatActivity().getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(onMapReadyCallback);
+//    }
 
-    void setToolbar() {
-        toolbar = Views.findById(this, R.id.toolbar);
-        toolbar.setTitle(R.string.str_flat);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-
-    }
+//    void setToolbar() {
+//        toolbar = Views.findById(this, R.id.toolbar);
+//        toolbar.setTitle(R.string.str_flat);
+//        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+//
+//    }
 
     void initControls() {
         createFlatBtn = Views.findById(this, R.id.save_flat_btn);
@@ -114,7 +111,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
 
     @Override
     public void attach(FlatCreationListener flatCreationListener) {
-        toolbar.setNavigationOnClickListener(onNavigationBackClickListener);
+//        toolbar.setNavigationOnClickListener(onNavigationBackClickListener);
         flatNameEditText.addTextChangedListener(textWatcher);
         addressEditText.addTextChangedListener(textWatcher);
         cityEditText.addTextChangedListener(textWatcher);
@@ -129,7 +126,7 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
 
     @Override
     public void detach(FlatCreationListener flatCreationListener) {
-        toolbar.setNavigationOnClickListener(null);
+//        toolbar.setNavigationOnClickListener(null);
         createFlatBtn.setOnClickListener(null);
         flatNameEditText.addTextChangedListener(null);
         addressEditText.addTextChangedListener(null);
@@ -235,9 +232,6 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
             } else if (countryEditText.isFocused()){
                 errCountryText.setVisibility(s.length() == 0 ? VISIBLE : GONE);
             }
-            String address = toAddress();
-           flatCreationListener.onAddressTextChanged(toAddress());
-
         }
     };
 
@@ -266,7 +260,6 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.save_flat_btn:
-                    System.out.println("saved click");
                     if (validateForm()) {
                         flatCreationListener.onCreateFlatClicked(formToFlat());
                     }
@@ -294,23 +287,23 @@ public class NewFlatView extends CoordinatorLayout implements NewFlatDisplayer {
         this.appCompatActivity = appCompatActivity;
     }
 
-    OnMapReadyCallback onMapReadyCallback = new OnMapReadyCallback() {
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-            mGoogleMap = googleMap;
-        }
-    };
+//    OnMapReadyCallback onMapReadyCallback = new OnMapReadyCallback() {
+//        @Override
+//        public void onMapReady(GoogleMap googleMap) {
+//            mGoogleMap = googleMap;
+//        }
+//    };
 
-    @Override
-    public void setMarker(Address address) {
-        if (mGoogleMap != null) {
-            mGoogleMap.clear();
-            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-            mGoogleMap.addMarker(new MarkerOptions().position(latLng));
-            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-        }
-
-    }
+//    @Override
+//    public void setMarker(Address address) {
+//        if (mGoogleMap != null) {
+//            mGoogleMap.clear();
+//            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+//            mGoogleMap.addMarker(new MarkerOptions().position(latLng));
+//            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+//        }
+//
+//    }
 
     @Override
     public void toggleViewVisibility(PreferenceService preferenceService) {

@@ -6,12 +6,13 @@ import android.support.annotation.Nullable;
 import com.easy.make.tenantmaker.R;
 import com.easy.make.tenantmaker.base.BaseActivity;
 import com.easy.make.tenantmaker.base.Dependencies;
+import com.easy.make.tenantmaker.base.Gallery.view.AddPicsView;
 import com.easy.make.tenantmaker.base.OnFragmentInteractionListener;
 import com.easy.make.tenantmaker.base.flat.view.NewFlatView;
 import com.easy.make.tenantmaker.base.navigation.AndroidNavigator;
 import com.easy.make.tenantmaker.core.flat.displayer.NewFlatDisplayer;
 import com.easy.make.tenantmaker.core.flat.presenter.NewFlatPresenter;
-import com.easy.make.tenantmaker.location.ReactiveLocationProviderImpl;
+import com.easy.make.tenantmaker.core.gallery.presenter.AddPicGalleryPresenter;
 
 
 /**
@@ -21,14 +22,16 @@ public class NewFlatActivity extends BaseActivity implements OnFragmentInteracti
 
     private NewFlatView newFlatView;
     private NewFlatPresenter newFlatPresenter;
+    private AddPicsView addPicsView;
+    private AddPicGalleryPresenter addPicPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_flat);
-        newFlatView = (NewFlatView) findViewById(R.id.create_new_flat);
+        newFlatView = (NewFlatView) findViewById(R.id.new_flat_view);
         newFlatView.setAppCompatActivity(this);
-        newFlatView.setMap();
+        addPicsView = (AddPicsView) findViewById(R.id.add_pics);
 
 //        final LocationRequest locationRequest = LocationRequest.create()
 //                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -41,8 +44,9 @@ public class NewFlatActivity extends BaseActivity implements OnFragmentInteracti
                 new AndroidNavigator(this),
                 Dependencies.INSTANCE.getErrorLogger(),
                 Dependencies.INSTANCE.getAnalytics(),
-                Dependencies.INSTANCE.getPreference(),
-                new ReactiveLocationProviderImpl(this));
+                Dependencies.INSTANCE.getPreference());
+
+        addPicPresenter = new AddPicGalleryPresenter(addPicsView);
     }
 
 
@@ -50,11 +54,13 @@ public class NewFlatActivity extends BaseActivity implements OnFragmentInteracti
     protected void onStart() {
         super.onStart();
         newFlatPresenter.startPresenting();
+        addPicPresenter.startPresenting();
     }
 
     @Override
     protected void onStop() {
         newFlatPresenter.stopPresenting();
+        addPicPresenter.stopPresenting();
         super.onStop();
     }
 

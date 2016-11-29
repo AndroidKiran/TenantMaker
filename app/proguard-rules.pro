@@ -16,5 +16,5 @@
 #   public *;
 #}
 -dontobfuscate
--keep class com.firebase.** { *; }
--keep class com.easy.make.tenantmaker.viewholders.** { *; }
+#-keep class com.firebase.** { *; }
+#-keep class com.easy.make.tenantmaker.viewholders.** { *; }
